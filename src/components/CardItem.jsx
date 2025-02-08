@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useProduct } from "../hooks/useCardProduct";
-import dadosJson from '../mocks/dados.json'
+import dados from '../mocks/dados.json'
 
 const class1 = 'flex space-x-6 h-30 rounded-2xl px-3 py-3 border-zinc-700 mt-3 '
 
@@ -8,13 +8,16 @@ const class2 = 'flex space-x-6 bg-amber-500 h-30  rounded-2xl px-3 border-b py-3
 
 export const CardItem = () => {
 
+  
   const { nameProduct } = useProduct();
   const [itemBg, setItemBg] = useState()
-
+  
+ 
+  
   return (
     <div>
       {
-        dadosJson[nameProduct].map((product, index) => (
+        dados[nameProduct].map((product, index) => (
           <div key={product.id} 
           onClick={() =>setItemBg(product.id)}
           className={` flex  items-center ${itemBg == product.id  ? class2 : class1}`}>
