@@ -20,7 +20,7 @@ export const CardItem = () => {
         dados[nameProduct].map((product, index) => (
           <div key={product.id} 
           onClick={() =>setItemBg(product.id)}
-          className={` flex  items-center ${itemBg == product.id  ? class2 : class1}`}>
+          className={` flex  ${itemBg == product.id  ? class2 : class1}`}>
 
             <div>
               <img className="w-24 rounded-2xl " src={product.img} alt={product.name} />
