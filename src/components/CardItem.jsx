@@ -30,7 +30,7 @@ export const CardItem = () => {
               <h2 className={`${itemBg === product.id ? 'uppercase font-bold text-black tracking-wide' : 'uppercase font-bold  text-mint-500 tracking-wide'}`}>{product.name}</h2>
               <p className="text-sm w-60">{product.dsc}</p>
 
-              <div className="flex absolute right-5 mt-2 rounded-md text-black px-3 justify-end font-medium bg-mint-500">
+              <div className="flex absolute right-5 -mt-2 rounded-md text-black px-3 justify-end font-medium bg-mint-500">
                 R$ {product.price.toFixed(2)}
               </div>
             </div>
