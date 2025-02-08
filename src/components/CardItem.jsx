@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useProduct } from "../hooks/useCardProduct";
-import dadosJson from '../mocks/dados2.json'
+import dadosJson from '../mocks/dados.json'
 
 const class1 = 'flex space-x-6 h-30 rounded-2xl px-3 py-3 border-zinc-700 mt-3 '
 
