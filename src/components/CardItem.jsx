@@ -15,7 +15,7 @@ export const CardItem = () => {
  
   
   return (
-    <div className="bg-[#f5f5f5] xl:w-[980px] mx-auto xl:px-8 ">
+    <div className="bg-[#f5f5f5] xl:w-[980px] space-y-1 mx-auto xl:px-8 ">
       {
         dados[nameProduct].map((product, index) => (
           <div key={product.id} 
@@ -27,10 +27,10 @@ export const CardItem = () => {
             </div>
 
             <div>
-              <h2 className={` font-primary text-xl  font-bold ${itemBg === product.id ? 'uppercase text-black' : 'uppercase font-bold  text-text-primary '}`}>{product.name}</h2>
+              <h2 className={` font-primary text-lg  font-bold ${itemBg === product.id ? 'uppercase text-black' : 'uppercase font-bold  text-text-primary '}`}>{product.name}</h2>
               <p className="text-sm text-text-secondary font-secondary w-60">{product.dsc}</p>
 
-              <div className="flex absolute right-5 bottom-2 rounded-md text-black px-3 justify-end font-medium bg-mint-500">
+              <div className="flex absolute right-5 bottom-2 rounded-md text-text-primary px-2 justify-end font-medium bg-mint-500">
                 R$ {product.price.toFixed(2)}
               </div>
             </div>
