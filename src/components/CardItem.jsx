@@ -38,7 +38,7 @@ export const CardItem = () => {
         <div
           key={product.id}
           onClick={() => handleClick(product)}
-          className={`mx-2 cursor-pointer flex justify-between items-center ${
+          className={`mx-2 relative cursor-pointer flex justify-center  ${
             selectedItem?.id === product.id ? class2 : class1
           }`}
         >
@@ -57,7 +57,7 @@ export const CardItem = () => {
             <p className="text-sm xl:w-full text-text-secondary font-secondary w-50">{product.dsc}</p>
           </div>
 
-          <div className="flex items-center h-6 right-5 bottom-2 rounded-md text-text-primary px-2 font-medium bg-mint-500">
+          <div className="flex items-center absolute h-6 right-5 bottom-2 rounded-md text-text-primary px-2 font-medium bg-mint-500">
             R$ {product.price.toFixed(2)}
           </div>
         </div>
