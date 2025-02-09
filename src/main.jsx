@@ -3,11 +3,14 @@ import './index.css';
 import { App } from './App';
 import { OpenProvider } from './context/ContextOpen';
 import { ProductProvider } from './context/CardProduct';
+import { OpenModalCard } from './context/OpenModal';
 
 createRoot(document.getElementById('root')).render(
   <OpenProvider>
     <ProductProvider>
-      <App />
+      <OpenModalCard>
+        <App />
+      </OpenModalCard>
     </ProductProvider>
   </OpenProvider>
 );

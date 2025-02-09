@@ -19,3 +19,14 @@ body{
 .imgcard{
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
+.modalCard{
+  background-color:  rgba(26, 26, 26, 0.747);
+}
+
+.name-item{
+  min-width: 0;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

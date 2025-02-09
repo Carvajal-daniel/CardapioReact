@@ -1,5 +1,4 @@
-import { FaHamburger, FaIceCream, FaPizzaSlice, FaBacon } from "react-icons/fa";
-import { GiChickenLeg } from "react-icons/gi";
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useEffect, useState } from 'react';
@@ -25,7 +24,7 @@ export const MenuItem = () => {
 
 
   return (
-    <div className="py-2 bg-[#f5f5f5] flex justify-center px-2 w-full xl:w-[980px] xl:mx-auto">
+    <div className="py-2 bg-[#f5f5f5]  flex justify-center px-2 w-full xl:w-[980px] xl:mx-auto ">
       <Swiper
         spaceBetween={20}
         slidesPerView={2}

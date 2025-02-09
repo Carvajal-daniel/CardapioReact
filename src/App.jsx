@@ -1,11 +1,13 @@
-
 import { CardItem } from "./components/CardItem"
 import { Header } from "./components/Header"
 import { HeaderInfo } from "./components/HeaderInfo"
 import { MenuItem } from "./components/MenuItem"
-
+import { ModalCard } from "./components/ModalCard"
+import useOpenModal from "./hooks/useModalCard"
 
 export const App = () => {
+  const { isOpenModal, setIsOpenModal } = useOpenModal()
+
   return (
     <>
       <header>
@@ -16,8 +18,18 @@ export const App = () => {
         <MenuItem />
       </nav>
       <section>
+
         <CardItem />
+
       </section>
+
+      <section className={`fixed top-0 z-50 left-0 right-0 bottom-0 modalCard ${!isOpenModal ? '' : 'hidden'}`}>
+        <ModalCard />
+      </section>
+
+      <footer>
+        <p>Criado e desenhado por: Daniel Carvajal</p>
+      </footer>
     </>
 
   )
