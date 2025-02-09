@@ -1,5 +1,5 @@
 
-import logo from '../assets/img/logo.png'
+import logo from '../assets/logo.png'
 import { FaStar } from "react-icons/fa";
 import { IsOpen } from './IsOpen';
 

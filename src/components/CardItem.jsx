@@ -20,7 +20,7 @@ export const CardItem = () => {
         dados[nameProduct].map((product, index) => (
           <div key={product.id} 
           onClick={() =>setItemBg(product.id)}
-          className={` flex  ${itemBg == product.id  ? class2 : class1}`}>
+          className={` flex relative  ${itemBg == product.id  ? class2 : class1}`}>
 
             <div>
               <img className="w-24 rounded-2xl " src={product.img} alt={product.name} />
@@ -30,7 +30,7 @@ export const CardItem = () => {
               <h2 className={`${itemBg === product.id ? 'uppercase font-bold text-black tracking-wide' : 'uppercase font-bold  text-mint-500 tracking-wide'}`}>{product.name}</h2>
               <p className="text-sm w-60">{product.dsc}</p>
 
-              <div className="flex absolute right-5 mt-[13px] rounded-md text-black px-3 justify-end font-medium bg-mint-500">
+              <div className="flex absolute right-5 bottom-2 rounded-md text-black px-3 justify-end font-medium bg-mint-500">
                 R$ {product.price.toFixed(2)}
               </div>
             </div>
