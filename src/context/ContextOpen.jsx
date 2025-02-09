@@ -11,8 +11,6 @@ const OpenProvider = ({ children }) => {
   useEffect(() =>{
       if(hour >= 16 && hour <= 23){
         setIsOpen(true)
-      }else{
-        setIsOpen(false)
       }
   }, [])
 

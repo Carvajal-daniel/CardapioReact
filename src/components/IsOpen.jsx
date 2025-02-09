@@ -7,7 +7,7 @@ export const IsOpen = () => {
   const { isOpen } = useIsOpen(); 
 
   return (
-    <div className={ ` flex items-center xl:text-sm gap-2 ${isOpen ? 'text-green-500' : 'text-red-700 '}`}>
+    <div className={ ` flex items-center xl:text-sm gap-2 ${isOpen ? 'text-green-500' : 'text-red-500 '}`}>
          <span>
           <FaRegClock />
         </span>

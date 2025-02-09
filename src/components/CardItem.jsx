@@ -27,8 +27,8 @@ export const CardItem = () => {
             </div>
 
             <div>
-              <h2 className={`${itemBg === product.id ? 'uppercase font-bold text-black tracking-wide' : 'uppercase font-bold  text-mint-500 tracking-wide'}`}>{product.name}</h2>
-              <p className="text-sm w-60">{product.dsc}</p>
+              <h2 className={` font-primary text-xl font-bold ${itemBg === product.id ? 'uppercase text-black' : 'uppercase font-bold  text-text-primary '}`}>{product.name}</h2>
+              <p className="text-sm text-text-secondary font-secondary w-60">{product.dsc}</p>
 
               <div className="flex absolute right-5 bottom-2 rounded-md text-black px-3 justify-end font-medium bg-mint-500">
                 R$ {product.price.toFixed(2)}

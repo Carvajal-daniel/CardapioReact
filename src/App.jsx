@@ -3,7 +3,6 @@ import { CardItem } from "./components/CardItem"
 import { Header } from "./components/Header"
 import { HeaderInfo } from "./components/HeaderInfo"
 import { MenuItem } from "./components/MenuItem"
-import { ProductProvider } from "./context/CardProduct"
 
 
 export const App = () => {
