@@ -3,7 +3,7 @@
     "Churrasco": [
         {
             "id": "ribs-brisket-and-burnt-ends",
-            "img": "../../public/img/cardapio/churrasco/bbq-meat-lovers-special-for-10.36ca670fda4bfa783c2ea9165e068d26.jpg",
+            "img": "/img/cardapio/churrasco/bbq-meat-lovers-special-for-10.36ca670fda4bfa783c2ea9165e068d26.jpg",
             "name": "Joe's KC BBQ",
             "dsc": "Joe's KC Ribs, Brisket & Burnt Ends",
             "price": 110.99
