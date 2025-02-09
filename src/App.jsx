@@ -18,9 +18,7 @@ export const App = () => {
         <MenuItem />
       </nav>
       <section>
-
         <CardItem />
-
       </section>
 
       <section className={`fixed top-0 z-50 left-0 right-0 bottom-0 modalCard ${!isOpenModal ? '' : 'hidden'}`}>

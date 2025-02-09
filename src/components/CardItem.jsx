@@ -4,7 +4,7 @@ import dados from "../mocks/dados2.json";
 import useOpenModal from "../hooks/useModalCard";
 
 const class1 = "flex space-x-6 h-30 rounded-2xl px-3 py-3 border-zinc-700";
-const class2 = "flex space-x-6 bg-white h-30 shadow-md rounded-2xl px-3 py-3 border-zinc-700";
+const class2 = "flex space-x-6 bg-white h-30 shadow-md rounded-2xl px-2 py-3 border-zinc-700";
 
 export const CardItem = () => {
   const { setIsOpenModal, setDataCard, isOpenModal } = useOpenModal();
@@ -33,12 +33,12 @@ export const CardItem = () => {
   
 
   return (
-    <div className="bg-[#f5f5f5]  xl:w-[980px] space-y-1 mx-auto xl:px-8">
+    <div className="bg-[#f5f5f5] xl:w-[980px] space-y-1 mx-auto xl:px-8">
       {dados[nameProduct].map((product) => (
         <div
           key={product.id}
           onClick={() => handleClick(product)}
-          className={`mx-2 relative cursor-pointer flex justify-center  ${
+          className={`mx-2 px-4 relative cursor-pointer  ${
             selectedItem?.id === product.id ? class2 : class1
           }`}
         >
