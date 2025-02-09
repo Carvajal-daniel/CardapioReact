@@ -23,7 +23,7 @@ export const CardItem = () => {
           className={`  mx-2 cursor-pointer flex relative transform l ${itemBg == product.id  ? class2 : class1}`}>
 
             <div>
-              <img className="w-24 rounded-2xl " src={product.img} alt={product.name} />
+              <img className="w-24 rounded-lg imgcard " src={product.img} alt={product.name} />
             </div>
 
             <div>

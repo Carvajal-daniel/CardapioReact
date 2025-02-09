@@ -58,8 +58,8 @@ export const MenuItem = () => {
         {menu.map((item, index) => (
           <SwiperSlide key={index}>
             <button
-              className={`flex mx-auto font-secondary cursor-pointer items-center justify-center gap-2 text-text-primary px-5 py-2 rounded-xl my-2 w-full 
-                        transform hover:scale-103 transition-all xl:w-40
+              className={`flex mx-auto font-secondary cursor-pointer items-center justify-center gap-2 text-lg text-text-primary py-2 rounded-xl my-2 w-full 
+                        transform hover:scale-105 transition-all xl:w-40
                         ${selectedItem === item.text ? 'bg-mint-500 text-white' : 'bg-white shadow-md'}`}
               aria-label={`Menu item: ${item.text}`}
               onClick={() => setSelectedItem(item.text)}

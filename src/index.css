@@ -5,7 +5,7 @@
 
 @theme {
   --color-mint-500: #ff6b35;
-  --color-text-primary: #333333;
+  --color-text-primary: #333;
   --color-text-secondary: #777777;
   --font-primary: "Playfair", serif;
   --font-secondary: "Lato", sans-serif;
@@ -15,4 +15,7 @@
 body{
   background-color: #cecece;
   color: #fff;
+}
+.imgcard{
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
