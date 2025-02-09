@@ -32,7 +32,7 @@ export const MenuItem = () => {
         autoplay={{ delay: 3000 }}
         breakpoints={{
           320: {
-            slidesPerView: 2,
+            slidesPerView: 3,
             spaceBetween: 10,
           },
           640: {
@@ -58,7 +58,7 @@ export const MenuItem = () => {
         {menu.map((item, index) => (
           <SwiperSlide key={index}>
             <button
-              className={`flex mx-auto font-secondary cursor-pointer items-center justify-center gap-2 text-lg text-text-primary py-2 rounded-xl my-2 w-full 
+              className={`flex mx-auto font-secondary cursor-pointer items-center justify-center gap-2 px-2 text-lg text-text-primary py-2 rounded-xl my-2 w-full 
                         transform hover:scale-105 transition-all xl:w-40
                         ${selectedItem === item.text ? 'bg-mint-500 text-white' : 'bg-white shadow-md'}`}
               aria-label={`Menu item: ${item.text}`}
