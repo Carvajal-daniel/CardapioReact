@@ -9,9 +9,10 @@
   --color-text-secondary: #777777;
   --font-primary: "Playfair", serif;
   --font-secondary: "Lato", sans-serif;
+  --bg--primary-bg: #f5f5f5;
 }
 
 body{
-  background-color: #f5f5f5;
+  background-color: #cecece;
   color: #fff;
 }

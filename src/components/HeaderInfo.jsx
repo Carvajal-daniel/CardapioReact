@@ -10,7 +10,7 @@ export const HeaderInfo = () => {
 
       <div className='flex items-center w-full justify-between'>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center py-2 gap-2">
           <img className="w-14 xl:w-12rounded-full " src={logo} alt="Logo do Menu Online" />
           <div className='text-base/5'>
             <h2 className="text-2xl xl:text-lg font-semibold text-text-primary font-primary">Menu-Online</h2>

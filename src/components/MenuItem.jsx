@@ -7,11 +7,11 @@ import { useProduct } from "../hooks/useCardProduct";
 
 // Menu item data
 const menu = [
-  { text: 'Burgers', icon: <FaHamburger /> },
-  { text: 'Pizzas', icon: <FaPizzaSlice /> },
-  { text: 'Churrasco', icon: <GiChickenLeg /> },
-  { text: 'Sobremesas', icon: <FaIceCream /> },
-  { text: 'Steaks', icon: <FaBacon /> },
+  { text: 'Burgers', icon: <img width={25} src={'../../public/img/icon/hamburger.png'} alt="" /> },
+  { text: 'Pizzas', icon: <img width={25} src={'../../public/img/icon/pizza.png'} alt="" /> },
+  { text: 'Churrasco', icon: <img width={25} src={'../../public/img/icon/chicken.png'} alt="" /> },
+  { text: 'Sobremesas', icon: <img width={25} src={'../../public/img/icon/ice-cream.png'} alt="" /> },
+  { text: 'Steaks', icon: <img width={25} src={'../../public/img/icon/bacon.png'} alt="" /> },
 ];
 
 export const MenuItem = () => {
@@ -25,7 +25,7 @@ export const MenuItem = () => {
 
 
   return (
-    <div className="py-2 flex justify-center w-full xl:w-[1000px] xl:mx-auto">
+    <div className="py-2 bg-[#f5f5f5] flex justify-center px-2 w-full xl:w-[980px] xl:mx-auto">
       <Swiper
         spaceBetween={20}
         slidesPerView={2}
@@ -58,7 +58,7 @@ export const MenuItem = () => {
         {menu.map((item, index) => (
           <SwiperSlide key={index}>
             <button
-              className={`flex mx-auto font-secondary cursor-pointer items-center justify-center gap-2 text-black px-5 py-2 rounded-2xl my-2 w-full 
+              className={`flex mx-auto font-secondary cursor-pointer items-center justify-center gap-2 text-text-primary px-5 py-2 rounded-xl my-2 w-full 
                         transform hover:scale-103 transition-all xl:w-40
                         ${selectedItem === item.text ? 'bg-mint-500 text-white' : 'bg-white shadow-md'}`}
               aria-label={`Menu item: ${item.text}`}
