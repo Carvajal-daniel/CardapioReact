@@ -7,11 +7,11 @@ import { useProduct } from "../hooks/useCardProduct";
 
 // Menu item data
 const menu = [
-  { text: 'Burgers', icon: <img width={25} src={'../../public/img/icon/hamburger.png'} alt="" /> },
-  { text: 'Pizzas', icon: <img width={25} src={'../../public/img/icon/pizza.png'} alt="" /> },
-  { text: 'Churrasco', icon: <img width={25} src={'../../public/img/icon/chicken.png'} alt="" /> },
-  { text: 'Sobremesas', icon: <img width={25} src={'../../public/img/icon/ice-cream.png'} alt="" /> },
-  { text: 'Steaks', icon: <img width={25} src={'../../public/img/icon/bacon.png'} alt="" /> },
+  { text: 'Burgers', icon: <img width={25} src={'/img/icon/hamburger.png'} alt="" /> },
+  { text: 'Pizzas', icon: <img width={25} src={'/img/icon/pizza.png'} alt="" /> },
+  { text: 'Churrasco', icon: <img width={25} src={'/img/icon/chicken.png'} alt="" /> },
+  { text: 'Sobremesas', icon: <img width={25} src={'/img/icon/ice-cream.png'} alt="" /> },
+  { text: 'Steaks', icon: <img width={25} src={'/img/icon/bacon.png'} alt="" /> },
 ];
 
 export const MenuItem = () => {
