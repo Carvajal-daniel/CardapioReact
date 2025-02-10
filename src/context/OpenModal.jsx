@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 const OpenModal = createContext()
 
 const OpenModalCard = ({children}) =>{
-  const [isOpenModal, setIsOpenModal] = useState(true)
+  const [isOpenModal, setIsOpenModal] = useState(false)
   const [dataCard, setDataCard] = useState(null)
 
 

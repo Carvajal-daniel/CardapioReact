@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useEffect, useState } from 'react';
 import { useProduct } from "../hooks/useCardProduct";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 // Menu item data
 const menu = [
@@ -24,7 +26,11 @@ export const MenuItem = () => {
 
 
   return (
-    <div className="py-2 bg-[#f5f5f5]  flex justify-center px-2 w-full xl:w-[980px] xl:mx-auto ">
+    <motion.div className="py-2 bg-[#f5f5f5]  flex justify-center px-2 w-full xl:w-[980px] xl:mx-auto "
+    initial={{x: -100}}
+    animate={{ x: 0 }}
+    transition={{ ease: "easeOut", duration: .9 }}
+    >
       <Swiper
         spaceBetween={20}
         slidesPerView={2}
@@ -71,6 +77,6 @@ export const MenuItem = () => {
 
         ))}
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
