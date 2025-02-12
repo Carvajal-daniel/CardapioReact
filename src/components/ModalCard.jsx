@@ -5,8 +5,9 @@ import { X } from "lucide-react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
 
-const classBtnMenos = 'border cursor-pointer px-[6px] py-[6px] text-lg rounded-lg bg-white shadow border-zinc-200 hover:scale-103';
-const classBtnMais = 'border text-white cursor-pointer px-[6px] py-[6px] text-lg rounded-lg bg-mint-500 shadow border-zinc-200 hover:scale-103';
+const classBtnMenos = 'cursor-pointer border px-3 py-2 text-lg rounded-lg bg-white shadow-md border-gray-300 hover:scale-105 transition';
+const classBtnMais = ' cursor-pointer border px-3 py-2 text-lg rounded-lg text-white bg-green-600 shadow-md border-green-500 hover:scale-105 transition';
+const classBtn = 'cursor-pointer border px-3 py-2 text-lg rounded-lg text-white bg-red-600 shadow-md border-red-500 hover:scale-105 transition';
 
 export const ModalCard = () => {
   const { dataCard, dataRender, setIsOpenModal, isOpenModal, setDataCard, setDataRender } = useOpenModal();
@@ -21,7 +22,6 @@ export const ModalCard = () => {
       const itemIndex = prev.findIndex((item) => item.name === dataCard.name);
 
       if (itemIndex !== -1) {
-      
         return prev.map((item, index) =>
           index === itemIndex ? { ...item, qtd: item.qtd + qtd } : item
         );
@@ -49,60 +49,59 @@ export const ModalCard = () => {
     setIsOpenModal(false);
     zerarValue();
     valueTotaL(dataCard, qtd);
-    
   };
 
   return (
     <AnimatePresence>
       {isOpenModal && dataCard && (
         <motion.div
-          className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50"
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           {/* Modal principal */}
           <motion.div
-            className="relative w-[90%] max-w-md bg-[#f5f5f5] h-auto rounded-lg shadow-lg overflow-hidden"
+            className="relative w-[85%] xl:max-w-80 max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden"
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            onClick={(e) => e.stopPropagation()} // Impede que o clique feche o modal
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Botão de fechar */}
-            <button onClick={handleClose} className="absolute top-2 right-2 bg-mint-500 text-white rounded-full p-[10px] shadow-md hover:bg-red-600 transition">
-              <X size={24} />
+            <button onClick={handleClose} className="cursor-pointer absolute top-3 right-3 bg-red-500 text-white rounded-full p-2 shadow-md hover:bg-red-600 transition">
+              <X size={20} />
             </button>
 
             {/* Conteúdo do Modal */}
             <div className="p-6">
               {/* Imagem do Produto */}
-              <div className="flex shadow-xl rounded-2xl items-center justify-center w-full">
-                <img className="w-full max-h-60 object-cover rounded-lg" src={dataCard.img} alt={dataCard.name} />
+              <div className="flex items-center justify-center w-full">
+                <img className="w-70 max-h-60 object-fit rounded-xl shadow-md" src={dataCard.img} alt={dataCard.name} />
               </div>
 
-              <div className="mt-3 flex flex-col space-y-4 text-gray-800">
-                {/* Logo */}
+              <div className="mt-4 flex flex-col space-y-4 text-gray-800">
+                {/* Logo e título */}
                 <div className="flex items-center">
                   <img width={30} src={imgLogo} alt="logo" />
-                  <h2 className="ml-2 text-md ">Menu-Online</h2>
+                  <h2 className="ml-2 text-lg font-semibold text-gray-700">Menu Online</h2>
                 </div>
 
                 {/* Nome do Produto */}
-                <h1 className="text-2xl font-primary -mt-2 font-medium">{dataCard.name}</h1>
+                <h1 className="text-2xl font-primary font-bold text-gray-900">{dataCard.name}</h1>
 
                 {/* Preço e Quantidade */}
-                <div className="flex items-center -mt-4 justify-between">
-                  <h2 className="text-lg text-text-primary font-bold">
-                    R$ {((dataCard.price ?? 0) * qtd).toFixed(2)}
+                <div className="flex items-center justify-between">
+                  <h2 className="text-lg text-gray-900 font-bold">
+                    R$ {dataCard.price.toFixed(2)}
                   </h2>
 
                   <div className="flex space-x-3">
-                    <button onClick={() => setQtd((prev) => (prev > 1 ? prev - 1 : 1))} className={`${qtd === 1 ? classBtnMenos : classBtnMais}`}>
+                    <button onClick={() => setQtd((prev) => (prev > 1 ? prev - 1 : 1))} className={`${qtd === 1 ? classBtnMenos : classBtn}`}>
                       <IoIosArrowBack />
                     </button>
-                    <span className="text-lg">{qtd}</span>
+                    <span className="text-lg font-bold">{qtd}</span>
                     <button onClick={() => setQtd((prev) => prev + 1)} className={classBtnMais}>
                       <IoIosArrowForward />
                     </button>
@@ -111,18 +110,12 @@ export const ModalCard = () => {
 
                 {/* Descrição */}
                 <div>
-                  <h2 className="font-semibold font-primary text-xl">Sobre:</h2>
-                  <p className="text-gray-600 text-sm">{dataCard.dsc}</p>
-                </div>
-
-                {/* Ingredientes */}
-                <div>
-                  <h2 className="font-semibold font-primary text-xl">Ingredientes:</h2>
+                  <h2 className="font-semibold text-xl">Sobre:</h2>
                   <p className="text-gray-600 text-sm">{dataCard.dsc}</p>
                 </div>
 
                 {/* Botão de Adicionar */}
-                <button onClick={handleAddToCart} className="bg-mint-500 w-full py-2 rounded-xl text-white text-lg">
+                <button onClick={handleAddToCart} className="cursor-pointer bg-green-600 hover:bg-green-700 w-full py-3 rounded-xl text-white text-lg font-semibold shadow-lg transition">
                   Adicionar à Sacola
                 </button>
               </div>

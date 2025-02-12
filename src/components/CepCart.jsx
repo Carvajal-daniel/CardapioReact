@@ -48,12 +48,13 @@ export const CepCart = ({ etapa, setEtapa, setDadosEntrega }) => {
         complemento,
       };
 
+      setEtapa(prev => prev + 1);
       setDadosEntrega(enderecoCompleto);
-      setEtapa(etapa + 1);
     }
   };
 
   return (
+   
     <div className="bg-white leading-7 p-4 mt-5 text-amber-950 rounded-lg max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300">
       <div className="mb-3">
         <h2 className="font-bold">Digite seu CEP</h2>

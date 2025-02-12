@@ -1,6 +1,6 @@
 import imgPoint from '../../public/img/icon/point.png';
 
-export const EnviarPEdido = ({ dataRender, dadosEntrega }) => {
+export const EnviarPEdido = ({setEtapa, dataRender, dadosEntrega }) => {
 
 
   return (

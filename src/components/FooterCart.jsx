@@ -1,10 +1,10 @@
 import { FaMotorcycle } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega }) => {
   const totalPrice = dataRender.reduce((acc, item) => acc + item.price * item.qtd, 0);
   const taxa = 7.50;
-
-  
 
 
   const enviarPedidoWhatsApp = (dadosEntrega, dataRender) => {
@@ -65,8 +65,8 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega }) => {
       <div className={` ${etapa === 2 ? " hidden justify-center items-center gap-3 mt-3 w-full" : 'flex'}`}>
 
         <button
-          onClick={() => etapa >= 1 && dataRender.length > 0 ? setEtapa(prev => prev + 1) :  alert('Seu carrinho esta Vacio')}
-          className={`${etapa >= 3 ? 'hidden' : "mt-2 bg-green-500 shadow-lg px-6 py-2 rounded-lg text-white font-medium hover:bg-green-600 transition" }`}>
+          onClick={() => etapa >= 1 && dataRender.length > 0 ? setEtapa(prev => prev + 1) : alert('Seu carrinho esta Vacio')}
+          className={`${etapa >= 3 ? 'hidden' : " cursor-pointer mt-2 bg-green-500 shadow-lg px-6 py-2 rounded-lg text-white font-medium hover:bg-green-600 transition" }`}>
           Continuar
         </button>
 
@@ -74,7 +74,7 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega }) => {
           etapa === 3 ? <div className="w-full flex items-center justify-center">
             <button
               onClick={() => enviarPedidoWhatsApp(dadosEntrega, dataRender)}
-              className=" bg-green-500 text-white px-4 py-2 mt-5 rounded-lg font-bold hover:bg-green-600 transition"
+              className=" cursor-pointer bg-green-500 text-white px-4 py-2 mt-5 rounded-lg font-bold hover:bg-green-600 transition"
             >
               📩 Enviar Pedido via WhatsApp
             </button> 
