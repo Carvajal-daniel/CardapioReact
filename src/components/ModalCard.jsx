@@ -33,6 +33,7 @@ export const ModalCard = () => {
             img: dataCard.img,
             price: dataCard.price,
             qtd: qtd,
+            id: dataCard.id
           },
         ];
       }
