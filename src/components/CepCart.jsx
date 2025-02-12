@@ -128,7 +128,7 @@ export const CepCart = ({ etapa, setEtapa, setDadosEntrega }) => {
 
           {/* Botão para avançar a etapa */}
           <button
-            className={`w-full p-3 mt-4 rounded-xl text-white font-bold transition ${
+            className={`w-full p-3 mt-2 rounded-xl text-white font-bold transition ${
               isComplete ? "bg-green-500 hover:bg-green-600" : "bg-gray-400 cursor-not-allowed"
             }`}
             onClick={handleContinuar}

@@ -136,14 +136,14 @@ export const Cart = () => {
       </div>
 
       {
-        etapa === 3 && <div className="bg-zinc-100  absolute top-15 inset-0">
+        etapa === 3 && <div className="bg-zinc-100 absolute top-15 inset-0">
         <EnviarPEdido dataRender={dataRender} dadosEntrega={dadosEntrega}/>
       </div>
       }
 
       {/* Rodapé fixo do carrinho */}
       <div className="absolute bottom-0 w-full bg-white border-t shadow-md">
-        <FooterCart dataRender={dataRender} setEtapa={setEtapa} etapa={etapa} />
+        <FooterCart dadosEntrega={dadosEntrega} dataRender={dataRender} setEtapa={setEtapa} etapa={etapa} />
       </div>
     </div>
   );

@@ -1,39 +1,11 @@
 import imgPoint from '../../public/img/icon/point.png';
 
 export const EnviarPEdido = ({ dataRender, dadosEntrega }) => {
-  console.log(dadosEntrega);
 
-  const enviarPedidoWhatsApp = (dadosEntrega, dataRender) => {
-    if (!dadosEntrega || !dadosEntrega.logradouro) {
-      alert("Endereço de entrega incompleto!");
-      return;
-    }
-  
-    const numeroWhatsApp = "+5585921518460"; // Substitua pelo número correto
-  
-    let mensagem = `📦 *Resumo do Pedido* 📦\n\n`;
-  
-    mensagem += `🛒 *Itens do Pedido:*\n`;
-    dataRender.map((item, index) => {
-      mensagem += `  ${index + 1}. ${item.name} - Quantidade: ${item.qtd}\n`;
-    });
-  
-    mensagem += `\n🏠 *Endereço de Entrega:*\n`;
-    mensagem += `  ${dadosEntrega.logradouro}, ${dadosEntrega.numero}, ${dadosEntrega.bairro}\n`;
-    mensagem += `  ${dadosEntrega.cidade}-${dadosEntrega.estado} / ${dadosEntrega.cep}\n`;
-    mensagem += dadosEntrega.complemento ? `  Complemento: ${dadosEntrega.complemento}\n` : "";
-  
-    mensagem += `\n✅ Pedido pronto para envio!`;
-  
-    const mensagemEncoded = encodeURIComponent(mensagem);
-    const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagemEncoded}`;
-  
-    window.open(urlWhatsApp, "_blank");
-  };
-  
 
   return (
-    <div className="text-center">
+    <div className="text-center h-[75%] overflow-auto"
+>
       <h2 className="font-bold text-xl text-start ml-7">Resumo do pedido</h2>
 
       <h2 className="mt-5 text-lg font-bold mb-3">Itens do pedido</h2>
@@ -71,12 +43,7 @@ export const EnviarPEdido = ({ dataRender, dadosEntrega }) => {
         <p className="text-zinc-500 mt-5">Endereço de entrega não informado.</p>
       )}
 
-<button 
-  onClick={() => enviarPedidoWhatsApp(dadosEntrega, dataRender)}
-  className="bg-green-500 text-white px-4 py-2 mt-5 rounded-lg font-bold hover:bg-green-600 transition"
->
-  📩 Enviar Pedido via WhatsApp
-</button>
+
 
     </div>
   );
