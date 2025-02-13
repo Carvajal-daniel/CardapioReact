@@ -7,8 +7,35 @@ export const CepCart = ({ etapa, setEtapa, setDadosEntrega }) => {
   const [numero, setNumero] = useState("");
   const [complemento, setComplemento] = useState("");
   const [isComplete, setIsComplete] = useState(false);
+  const [carrinho, setCarrinho] = useState([]);
 
-  // Busca o CEP quando clicado
+  // Carregar endereço salvo e carrinho do localStorage
+  useEffect(() => {
+    const enderecoSalvo = JSON.parse(localStorage.getItem("enderecoEntrega"));
+    if (enderecoSalvo) {
+      setCep(enderecoSalvo.cep || "");
+      setDataCep({
+        logradouro: enderecoSalvo.logradouro || "",
+        bairro: enderecoSalvo.bairro || "",
+        localidade: enderecoSalvo.cidade || "",
+        uf: enderecoSalvo.estado || "",
+      });
+      setNumero(enderecoSalvo.numero || "");
+      setComplemento(enderecoSalvo.complemento || "");
+    }
+
+    const carrinhoSalvo = JSON.parse(localStorage.getItem("carrinho")) || [];
+    setCarrinho(carrinhoSalvo);
+  }, []);
+
+  // Salva o CEP no localStorage sempre que ele for alterado
+  useEffect(() => {
+    if (cep.length === 8) {
+      localStorage.setItem("cep", cep);
+    }
+  }, [cep]);
+
+  // Quando busca o CEP, já salva os dados no localStorage
   const handleSearchCep = () => {
     if (cep.length === 8) {
       fetch(`https://viacep.com.br/ws/${cep}/json/`)
@@ -16,6 +43,15 @@ export const CepCart = ({ etapa, setEtapa, setDadosEntrega }) => {
         .then((data) => {
           if (!data.erro) {
             setDataCep(data);
+            localStorage.setItem("enderecoEntrega", JSON.stringify({
+              cep,
+              logradouro: data.logradouro,
+              bairro: data.bairro,
+              cidade: data.localidade,
+              estado: data.uf,
+              numero,
+              complemento,
+            }));
           } else {
             alert("CEP não encontrado!");
           }
@@ -26,16 +62,12 @@ export const CepCart = ({ etapa, setEtapa, setDadosEntrega }) => {
     }
   };
 
-  // Verifica se todos os campos estão preenchidos
+  // Verifica se todos os campos obrigatórios foram preenchidos
   useEffect(() => {
-    if (dataCep.logradouro && dataCep.bairro && dataCep.localidade && dataCep.uf && numero) {
-      setIsComplete(true);
-    } else {
-      setIsComplete(false);
-    }
+    setIsComplete(!!(dataCep.logradouro && dataCep.bairro && dataCep.localidade && dataCep.uf && numero));
   }, [dataCep, numero]);
 
-  // Função para salvar os dados do endereço e avançar etapa
+  // Salva os dados no localStorage e avança para a próxima etapa
   const handleContinuar = () => {
     if (isComplete) {
       const enderecoCompleto = {
@@ -48,23 +80,23 @@ export const CepCart = ({ etapa, setEtapa, setDadosEntrega }) => {
         complemento,
       };
 
-      setEtapa(prev => prev + 1);
+      localStorage.setItem("enderecoEntrega", JSON.stringify(enderecoCompleto));
+      setEtapa((prev) => prev + 1);
       setDadosEntrega(enderecoCompleto);
     }
   };
 
   return (
-   
-    <div className="bg-white leading-7 p-4 mt-5 text-amber-950 rounded-lg max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300">
+    <div className="bg-white min-h-[693px] leading-7 p-4 mt-5 text-amber-950 rounded-lg max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300">
       <div className="mb-3">
         <h2 className="font-bold">Digite seu CEP</h2>
         <div className="flex gap-2">
           <input
-            type="number"
+            type="text"
             placeholder="Ex: 01001000"
             className="border border-zinc-300 shadow-lg outline-none bg-white px-2 py-2 rounded-xl w-full"
             value={cep}
-            onChange={(e) => setCep(e.target.value)}
+            onChange={(e) => setCep(e.target.value.replace(/\D/g, "").slice(0, 8))} // Apenas números
           />
           <button
             onClick={handleSearchCep}
@@ -127,7 +159,6 @@ export const CepCart = ({ etapa, setEtapa, setDadosEntrega }) => {
             />
           </div>
 
-          {/* Botão para avançar a etapa */}
           <button
             className={`w-full p-3 mt-2 rounded-xl text-white font-bold transition ${
               isComplete ? "bg-green-500 hover:bg-green-600" : "bg-gray-400 cursor-not-allowed"

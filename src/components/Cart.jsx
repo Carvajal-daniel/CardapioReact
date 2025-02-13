@@ -9,6 +9,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CepCart } from "./CepCart";
 import { EnviarPEdido } from "./EnviarPEdido";
 
+const STORAGE_KEY = "cartItems";
+
 const classBtnMenos =
   "border cursor-pointer px-[3px] py-[3px] text-lg rounded-lg bg-white shadow border-zinc-200 hover:scale-105 active:scale-95 transition";
 const classBtnMais =
@@ -23,16 +25,26 @@ export const Cart = () => {
   const [dadosEntrega, setDadosEntrega] = useState();
 
   useEffect(() => {
-    console.log("Etapa atual:", etapa); // Verifique o valor da etapa
-    if (isOpenCart) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
+    const storedCart = localStorage.getItem(STORAGE_KEY);
+    if (storedCart) {
+      setDataRender(JSON.parse(storedCart));
     }
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isOpenCart, etapa]);
+  }, []);
+
+  useEffect(() => {
+    if (dataRender.length > 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(dataRender));
+    } else {
+      localStorage.removeItem(STORAGE_KEY); // Remove se estiver vazio
+    }
+  }, [dataRender]);
+
+  useEffect(() => {
+    if (etapa === 0) {
+      setIsOpenCart(false); // Fecha o carrinho quando etapa for 0
+      localStorage.clear(); // Remove todos os dados do localStorage
+    }
+  }, [etapa, setIsOpenCart]);
 
   const updateQuantity = (index, amount) => {
     setDataRender((prevData) =>
@@ -46,9 +58,6 @@ export const Cart = () => {
     setDataRender((prevData) => prevData.filter((item) => item.id !== id));
   }
 
-  console.log(etapa);
-  
-
   return (
     <AnimatePresence mode="wait">
       {isOpenCart && (
@@ -61,15 +70,19 @@ export const Cart = () => {
           className="fixed top-0 right-0 h-full w-[90%] max-w-sm bg-zinc-100 shadow-lg text-text-primary z-50"
         >
           <button
-            onClick={() => setIsOpenCart(false)}
-            className="bg-red-500 text-white p-2 rounded-full absolute top-4 right-4 hover:bg-red-600 transition"
+            onClick={() => {
+              setIsOpenCart(false);
+              setEtapa(1); // Reseta a etapa para 1 ao fechar o carrinho
+            }}
+            className="bg-red-500 text-white p-2 rounded-full absolute top-[20px] right-4 hover:bg-red-600 transition"
           >
             <IoMdClose size={20} />
           </button>
 
+
           <button
             onClick={() => setEtapa((prev) => prev - 1)}
-            className={`${etapa === 1 ? "hidden" : "mt-[19px] shadow shadow-green-500 ml-4 border border-zinc-300 text-zinc-600 bg-white px-4 py-2 rounded-lg hover:bg-zinc-100 transition"}`}
+            className={`${etapa === 1 ? "hidden" : " text-lg mt-[19px] shadow shadow-green-500 ml-4 border border-zinc-300 text-zinc-600 bg-white px-3 py-2 rounded-lg hover:bg-zinc-100 transition"}`}
           >
             <IoIosArrowBack />
           </button>
@@ -126,20 +139,17 @@ export const Cart = () => {
             )}
           </div>
 
-          {/* Condicional de renderização com base na etapa */}
           {etapa === 2 && (
             <div className="absolute top-12 right-0 inset-0">
               <CepCart setEtapa={setEtapa} setDadosEntrega={setDadosEntrega} />
             </div>
           )}
 
-          {
-            etapa === 3 ?
-        <div className="absolute top-16 bg-white inset-0">
-          <EnviarPEdido setEtapa={setEtapa} dataRender={dataRender} dadosEntrega={dadosEntrega}/>
-        </div>
-          : ''}
-
+          {etapa === 3 && (
+            <div className="absolute top-16 bg-white inset-0">
+              <EnviarPEdido setEtapa={setEtapa} dataRender={dataRender} dadosEntrega={dadosEntrega} />
+            </div>
+          )}
 
           <div className="absolute bottom-0 w-full bg-white border-t shadow-md">
             <FooterCart dadosEntrega={dadosEntrega} dataRender={dataRender} setEtapa={setEtapa} etapa={etapa} />
