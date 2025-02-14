@@ -56,7 +56,7 @@ export const MenuItem = () => {
             >
 
             <button
-              className={`flex mx-auto font-secondary cursor-pointer items-center justify-center rounded-t gap-2 px-2 text-lg text-text-primary py-2 my-2 w-full xl:py-1 xl:text-sm
+              className={`flex mx-auto font-secondary cursor-pointer items-center justify-center rounded-t gap-2 px-2 text-lg text-text-primary py-2 my-2 w-full xl:py-2 xl:text-md
                         transform hover:scale-105 transition-all xl:w-40
                         ${selectedItem === item.text ? "bg-white text-text-primary shadow-md border-b-3 border-green-500" : "bg-white shadow-md"}`}
               aria-label={`Menu item: ${item.text}`}

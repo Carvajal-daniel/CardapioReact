@@ -1,12 +1,16 @@
+import { useEffect } from "react";
 import { FaMotorcycle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega }) => {
+export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega, setTotalApagar }) => {
   const totalPrice = dataRender.reduce((acc, item) => acc + item.price * item.qtd, 0);
-  const taxa = 7.50;
+  const taxa = 7.50;  
 
-console.log(etapa);
+ useEffect(() =>{
+  setTotalApagar(totalPrice)
+ },[])
+  
 
   const enviarPedidoWhatsApp = (dadosEntrega, dataRender) => {
     if (!dadosEntrega || !dadosEntrega.logradouro) {
@@ -28,22 +32,25 @@ console.log(etapa);
     mensagem += `  ${dadosEntrega.cidade}-${dadosEntrega.estado} / ${dadosEntrega.cep}\n`;
     mensagem += dadosEntrega.complemento ? `  Complemento: ${dadosEntrega.complemento}\n` : "";
   
+    if (dadosEntrega.trocoPara) {
+      const troco = parseFloat(dadosEntrega.trocoPara); // Conversão para número
+      if (!isNaN(troco)) {
+        mensagem += `\n💰 *Troco para:* R$ ${troco.toFixed(2)}\n`;
+      }
+    }
+  
     mensagem += `\n✅ Pedido pronto para envio!`;
   
     const mensagemEncoded = encodeURIComponent(mensagem);
     const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagemEncoded}`;
   
     localStorage.clear();
- 
-      setEtapa(0);
-   
+    setEtapa(0);
     window.open(urlWhatsApp, "_blank");
   };
-  
-  
 
   return (
-    <div className="flex flex-col  p-4 bg-white shadow-md rounded-lg ">
+    <div className="flex flex-col p-4 bg-white shadow-md rounded-lg ">
       {/* Subtotal */}
       <div className="flex gap-2 justify-end font-medium text-zinc-700">
         <h2 className="text-lg">SubTotal:</h2>
@@ -56,35 +63,33 @@ console.log(etapa);
           <FaMotorcycle className="text-green-500 text-2xl" />
           <span>Entrega:</span>
         </div>
-        <span className="text-zinc-700">R$ {taxa.toFixed(2)}</span>
+        <span className="text-zinc-700">R$ {parseFloat(taxa).toFixed(2)}</span> {/* Garantindo que taxa seja numérica */}
       </div>
 
       {/* Total */}
       <div className="flex items-center justify-between w-full border-t pt-3 mt-2 border-zinc-200">
         <h2 className="text-xl font-semibold text-zinc-900">Total:</h2>
-        <span className="text-emerald-500 text-2xl font-bold">R$ {(totalPrice + taxa).toFixed(2)}</span>
+        <span className="text-emerald-500 text-2xl font-bold">R$ {(totalPrice + parseFloat(taxa)).toFixed(2)}</span>
       </div>
 
-
       {/* Botões */}
-      <div className={` ${etapa === 2 ? " hidden justify-center items-center gap-3 mt-3 w-full" : 'flex'}`}>
-
+      <div className={`${etapa === 2 ? " hidden justify-center items-center gap-3 mt-3 w-full" : 'flex'}`}>
         <button
-          onClick={() => etapa >= 1 && dataRender.length > 0 ? setEtapa(prev => prev + 1) : alert('Seu carrinho esta Vacio')}
+          onClick={() => etapa >= 1 && dataRender.length > 0 ? setEtapa(prev => prev + 1) : alert('Seu carrinho está vazio')}
           className={`${etapa >= 3 ? 'hidden' : " cursor-pointer mt-2 bg-green-500 shadow-lg px-6 py-2 rounded-lg text-white font-medium hover:bg-green-600 transition" }`}>
           Continuar
         </button>
 
-        {
-          etapa === 3 ? <div className="w-full flex items-center justify-center">
+        {etapa === 4 && (
+          <div className="w-full flex items-center justify-center">
             <button
               onClick={() => enviarPedidoWhatsApp(dadosEntrega, dataRender)}
               className=" cursor-pointer bg-green-500 text-white px-4 py-2 mt-5 rounded-lg font-bold hover:bg-green-600 transition"
             >
               📩 Enviar Pedido via WhatsApp
-            </button> 
+            </button>
           </div>
-            : ''}
+        )}
       </div>
     </div>
   );

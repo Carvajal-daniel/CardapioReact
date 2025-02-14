@@ -19,7 +19,7 @@ export const App = () => {
         <Header />
         <HeaderInfo />
       </header>
-      <nav>
+      <nav className="sticky top-0 z-50">
         <MenuItem />
       </nav>
 

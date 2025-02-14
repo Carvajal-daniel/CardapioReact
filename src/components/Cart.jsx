@@ -8,6 +8,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { CepCart } from "./CepCart";
 import { EnviarPEdido } from "./EnviarPEdido";
+import { FormaPagamento } from "./FormaPagamento";
 
 const STORAGE_KEY = "cartItems";
 
@@ -23,6 +24,11 @@ export const Cart = () => {
   const { dataRender, setDataRender } = useOpenModalCard();
   const [etapa, setEtapa] = useState(1);
   const [dadosEntrega, setDadosEntrega] = useState();
+  const [totalPagar, setTotalApagar] = useState()
+
+console.log(totalPagar);
+
+  
 
   useEffect(() => {
     if (isOpenCart) {
@@ -31,7 +37,7 @@ export const Cart = () => {
       document.body.style.overflow = "auto";
     }
 
-    console.log(etapa);
+    console.log(dadosEntrega);
 
 
     return () => {
@@ -74,13 +80,6 @@ export const Cart = () => {
   }
 
 
-  const handleBackStep = () => {
-    if (etapa > 1) {
-      setEtapa(etapa - 1);
-    }
-  };
-
-
   return (
     <AnimatePresence mode="wait">
       {isOpenCart && (
@@ -116,7 +115,7 @@ export const Cart = () => {
 
 
             {/* Conteúdo do Carrinho */}
-            <div className="p-4 h-[660px] xl:h-[560px] md:h-[400px] overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
+            <div className="p-4 h-[660px] xl:h-[750px] md:h-[400px] overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
               {Array.isArray(dataRender) && dataRender.length > 0 ? (
                 dataRender.map((item, index) => (
                   <div
@@ -170,8 +169,14 @@ export const Cart = () => {
                 <CepCart setEtapa={setEtapa} setDadosEntrega={setDadosEntrega} />
               </div>
             )}
-
             {etapa === 3 && (
+              <div className="absolute top-14 min-h-10 right-0 inset-0">
+                <FormaPagamento totalPagar={totalPagar} setEtapa={setEtapa} setDadosEntrega={setDadosEntrega} />
+              </div>
+            )}
+
+
+            {etapa === 4 && (
               <div className="absolute top-16 bg-white inset-0">
                 <EnviarPEdido setEtapa={setEtapa} dataRender={dataRender} dadosEntrega={dadosEntrega} />
               </div>
@@ -179,7 +184,7 @@ export const Cart = () => {
 
             {/* Footer */}
             <div className="absolute bottom-0 w-full bg-white border-t shadow-md">
-              <FooterCart dadosEntrega={dadosEntrega} dataRender={dataRender} setEtapa={setEtapa} etapa={etapa} />
+              <FooterCart dadosEntrega={dadosEntrega} dataRender={dataRender} setEtapa={setEtapa} etapa={etapa} setTotalApagar={setTotalApagar}/>
             </div>
           </div>
         </motion.div>

@@ -1,9 +1,9 @@
 import imgPoint from '../../public/img/icon/point.png';
 
-export const EnviarPEdido = ({ setEtapa, setIsOpenCart, dataRender, setDataRender, dadosEntrega }) => {
+export const EnviarPEdido = ({dataRender, dadosEntrega }) => {
 
   return (
-    <div className=" text-center h-[70%] md:h-[350px] overflow-auto">
+    <div className=" text-center h-[70%] md:h-[350px] xl:h-[700px] overflow-auto">
       <h2 className="font-bold text-xl text-center py-3 border-b border-zinc-300 mb-2">Resumo do pedido</h2>
 
       <div className="w-full px-7">
