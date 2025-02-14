@@ -87,89 +87,90 @@ export const CepCart = ({ etapa, setEtapa, setDadosEntrega }) => {
   };
 
   return (
-    <div className="bg-white min-h-[693px] leading-7 p-4 mt-5 text-amber-950 rounded-lg max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300">
-      <div className="mb-3">
-        <h2 className="font-bold">Digite seu CEP</h2>
+    <div className=" bg-white h-[700px] md:h-[450px] p-4 mt-4 text-amber-950 overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
+
+      <div className="mb-2">
+        <h2 className="font-bold mb-1 text-lg">Digite seu CEP</h2>
         <div className="flex gap-2">
           <input
             type="text"
             placeholder="Ex: 01001000"
-            className="border border-zinc-300 shadow-lg outline-none bg-white px-2 py-2 rounded-xl w-full"
+            className="border border-zinc-300 shadow-md outline-none bg-white px-3 py-2 rounded-lg w-full"
             value={cep}
-            onChange={(e) => setCep(e.target.value.replace(/\D/g, "").slice(0, 8))} // Apenas números
+            onChange={(e) => setCep(e.target.value.replace(/\D/g, "").slice(0, 8))}
           />
           <button
             onClick={handleSearchCep}
-            className="bg-blue-500 text-white flex items-center justify-center w-12 p-2 rounded-md hover:bg-blue-600 transition"
+            className="bg-blue-500 text-white flex items-center justify-center w-10 h-10 rounded-lg hover:bg-blue-600 transition"
           >
-            <CiSearch size={25} />
+            <CiSearch size={22} />
           </button>
         </div>
       </div>
 
       {dataCep.logradouro && (
-        <>
+        <div className="mt-3">
           <div className="mb-3">
-            <h2 className="font-bold">Endereço:</h2>
+            <h2 className="font-bold mb-1 text-md">Endereço:</h2>
             <input
               type="text"
-              className="border outline-none border-zinc-300 shadow-lg bg-white px-2 py-2 rounded-xl w-full"
+              className="border border-zinc-300 shadow-md bg-white px-3 py-2 rounded-lg w-full"
               value={dataCep.logradouro || ""}
               readOnly
             />
           </div>
 
           <div className="mb-3">
-            <h2 className="font-bold">Bairro:</h2>
+            <h2 className="font-bold mb-1 text-md">Bairro:</h2>
             <input
               type="text"
-              className="border outline-none border-zinc-300 shadow-lg bg-white px-2 py-2 rounded-xl w-full"
+              className="border border-zinc-300 shadow-md bg-white px-3 py-2 rounded-lg w-full"
               value={dataCep.bairro || ""}
               readOnly
             />
           </div>
 
           <div className="mb-3">
-            <h2 className="font-bold">Número:</h2>
+            <h2 className="font-bold mb-1 text-md">Número:</h2>
             <input
               type="number"
-              className="border outline-none border-zinc-300 shadow-lg bg-white px-2 py-2 rounded-xl w-full"
+              className="border border-zinc-300 shadow-md bg-white px-3 py-2 rounded-lg w-full"
               value={numero}
               onChange={(e) => setNumero(e.target.value)}
             />
           </div>
 
           <div className="mb-3">
-            <h2 className="font-bold">Cidade:</h2>
+            <h2 className="font-bold mb-1 text-md">Cidade / Estado:</h2>
             <input
               type="text"
-              className="border outline-none border-zinc-300 shadow-lg bg-white px-2 py-2 rounded-xl w-full"
+              className="border border-zinc-300 shadow-md bg-white px-3 py-2 rounded-lg w-full"
               value={`${dataCep.localidade || ""} / ${dataCep.uf || ""}`}
               readOnly
             />
           </div>
 
           <div className="mb-3">
-            <h2 className="font-bold">Complemento:</h2>
+            <h2 className="font-bold mb-1 text-md">Complemento:</h2>
             <input
               type="text"
-              className="border outline-none border-zinc-300 shadow-lg bg-white px-2 py-2 rounded-xl w-full"
+              className="border border-zinc-300 shadow-md bg-white px-3 py-2 rounded-lg w-full"
               value={complemento}
               onChange={(e) => setComplemento(e.target.value)}
             />
           </div>
 
           <button
-            className={`w-full p-3 mt-2 rounded-xl text-white font-bold transition ${
-              isComplete ? "bg-green-500 hover:bg-green-600" : "bg-gray-400 cursor-not-allowed"
-            }`}
+            className={`w-full p-3 mt-2 rounded-lg text-white font-bold transition ${isComplete ? "bg-green-500 hover:bg-green-600" : "bg-gray-400 cursor-not-allowed"
+              }`}
             onClick={handleContinuar}
             disabled={!isComplete}
           >
             Continuar
           </button>
-        </>
+        </div>
       )}
     </div>
+
   );
 };

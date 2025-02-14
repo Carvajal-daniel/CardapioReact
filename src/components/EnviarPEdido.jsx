@@ -2,27 +2,9 @@ import imgPoint from '../../public/img/icon/point.png';
 
 export const EnviarPEdido = ({ setEtapa, setIsOpenCart, dataRender, setDataRender, dadosEntrega }) => {
 
-  const handleFinalizarPedido = () => {
-    // Limpar o localStorage
-    localStorage.removeItem("cartItems");
-    console.log("localStorage após remover cartItems", localStorage.getItem("cartItems")); // Verificar se o carrinho foi removido
-  
-    // Limpar o estado imediatamente
-    setDataRender([]); // Limpa os itens do carrinho no estado
-    console.log("dataRender após limpar:", dataRender); // Verificar se o estado foi limpo corretamente
-  
-    // Fechar o carrinho e resetar a etapa para 1
-    setIsOpenCart(false); // Fecha o carrinho
-    setEtapa(1); // Reseta a etapa para 1 (inicial)
-  
-    // Aqui você pode adicionar qualquer lógica de envio do pedido, como chamadas de API, etc.
-    console.log("Pedido enviado", dataRender, dadosEntrega);
-  };
   return (
-    <div className="text-center h-[75%] overflow-auto">
-      <h2 className="font-bold text-xl text-start ml-7">Resumo do pedido</h2>
-
-      <h2 className="mt-5 text-lg font-bold mb-3">Itens do pedido</h2>
+    <div className=" text-center h-[70%] md:h-[350px] overflow-auto">
+      <h2 className="font-bold text-xl text-center py-3 border-b border-zinc-300 mb-2">Resumo do pedido</h2>
 
       <div className="w-full px-7">
         {dataRender && dataRender.length > 0 ? (
@@ -57,13 +39,7 @@ export const EnviarPEdido = ({ setEtapa, setIsOpenCart, dataRender, setDataRende
         <p className="text-zinc-500 mt-5">Endereço de entrega não informado.</p>
       )}
 
-      {/* Botão para finalizar o pedido */}
-      <button
-        onClick={handleFinalizarPedido}
-        className="mt-6 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-      >
-        Finalizar Pedido
-      </button>
+     
     </div>
   );
 };
