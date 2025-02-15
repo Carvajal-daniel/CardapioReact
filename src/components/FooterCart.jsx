@@ -53,7 +53,7 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega, setTotal
   
 
   return (
-    <div className="flex flex-col mb-5 p-4 bg-white shadow-md rounded-lg">
+    <div className="flex relative flex-col mb-2 p-4 bg-white shadow-md rounded-lg">
       {/* Subtotal */}
       <div className="flex -mt-5 gap-2 justify-end font-medium text-zinc-700">
         <h2 className="text-lg">SubTotal:</h2>
@@ -85,7 +85,7 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega, setTotal
       <div className={`${etapa === 2 ? "hidden justify-center items-center gap-3 mt-3 w-full" : 'flex'}`}>
         <button
           onClick={() => etapa >= 1 && dataRender.length > 0 ? setEtapa(prev => prev + 1) : alert('Seu carrinho está vazio')}
-          className={`${etapa >= 3 ? 'hidden' : "cursor-pointer mt-2 bg-green-500 shadow-lg px-6 py-2 rounded-lg text-white font-medium hover:bg-green-600 transition"}`}>
+          className={`${etapa >= 3 ? 'hidden' : "absolute top-0 cursor-pointer mt-2 bg-green-500 shadow-lg px-6 py-2 rounded-lg text-white font-medium hover:bg-green-600 transition"}`}>
           Continuar
         </button>
         {etapa === 4 && (
