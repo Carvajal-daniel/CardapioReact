@@ -111,7 +111,7 @@ export const Cart = () => {
               </div>
 
               {/* Conteúdo do Carrinho */}
-              <div className="h-[100vh] p-4 pb-80 xl:h-[750px] md:h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
+              <div className="h-[100vh] pb-60 lg:h-[80vh] lg:pb-50 xl:h-[750px] md:h-[75vh] p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
                 {Array.isArray(dataRender) && dataRender.length > 0 ? (
                   dataRender.map((item, index) => (
                     <div
