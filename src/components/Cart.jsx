@@ -13,11 +13,11 @@ import { FormaPagamento } from "./FormaPagamento";
 const STORAGE_KEY = "cartItems";
 
 const classBtnMenos =
-  "border cursor-pointer px-[3px] py-[3px] text-lg rounded-lg bg-white shadow border-zinc-200 hover:scale-105 active:scale-95 transition";
+  "border cursor-pointer px-2 py-2 text-lg rounded-lg bg-white shadow border-zinc-200 hover:scale-105 active:scale-95 transition";
 const classBtnMais =
-  "border text-white cursor-pointer px-[3px] py-[3px] text-lg rounded-lg shadow bg-green-500 border-zinc-200 hover:scale-105 active:scale-95 transition hover:bg-green-600";
+  "border text-white cursor-pointer px-2 py-2 text-lg rounded-lg shadow bg-green-500 border-zinc-200 hover:scale-105 active:scale-95 transition hover:bg-green-600";
 const classBtn =
-  "border text-white cursor-pointer px-[3px] py-[3px] text-lg rounded-lg bg-red-500 shadow border-zinc-200 hover:scale-105 active:scale-95 transition hover:bg-red-600";
+  "border text-white cursor-pointer px-2 py-2 text-lg rounded-lg bg-red-500 shadow border-zinc-200 hover:scale-105 active:scale-95 transition hover:bg-red-600";
 
 export const Cart = () => {
   const { isOpenCart, setIsOpenCart } = useCart();
@@ -26,9 +26,6 @@ export const Cart = () => {
   const [dadosEntrega, setDadosEntrega] = useState();
   const [totalPagar, setTotalApagar] = useState();
   const [alertVisible, setAlertVisible] = useState(false);
-
-  console.log(etapa);
-  
 
   useEffect(() => {
     if (isOpenCart) {
@@ -79,7 +76,7 @@ export const Cart = () => {
   return (
     <>
       {alertVisible && (
-        <div className="w-60 absolute z-50 right-50 bottom-3 xl:bottom-10 xl:right-6 transform xl:-translate-x-1/2 bg-green-500 text-white text-center py-2 px-4 rounded-md shadow-md">
+        <div className="w-60 absolute z-50 right-1/2 bottom-3 transform xl:-translate-x-1/2 bg-green-500 text-white text-center py-2 px-4 rounded-md shadow-md">
           <p className="text-sm">Item adicionado ao carrinho!</p>
         </div>
       )}
@@ -92,13 +89,13 @@ export const Cart = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 300 }}
             transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            className="fixed top-0 right-0 h-screen w-full md:max-w-md bg-zinc-100 shadow-lg text-text-primary z-50"
+            className="fixed top-0 right-0 h-full w-full md:max-w-md bg-zinc-100 shadow-lg text-text-primary z-50"
           >
-            <div className="flex flex-col h-full">
+            <div>
               <div className="shadow-lg border-b border-zinc-200 bg-white h-16 flex items-center justify-between px-4">
                 <button
                   onClick={() => setEtapa(1)}
-                  className="text-xl bg-white border-1 shadow border-zinc-200 px-3 py-2 rounded font-medium"
+                  className="text-xl bg-white border-1 shadow border-zinc-200 px-3 py-2 rounded font-medium "
                 >
                   <IoIosArrowBack />
                 </button>
@@ -113,7 +110,8 @@ export const Cart = () => {
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
+              {/* Conteúdo do Carrinho */}
+              <div className="h-[450px] pb-30 p-4 xl:h-[750px] md:h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
                 {Array.isArray(dataRender) && dataRender.length > 0 ? (
                   dataRender.map((item, index) => (
                     <div
@@ -121,14 +119,35 @@ export const Cart = () => {
                       className="relative flex justify-between items-center w-full bg-white p-3 mb-2 rounded-lg shadow"
                     >
                       <div className="flex gap-3">
-                        <img src={item.img} alt={item.name} className="w-16 h-16 rounded-md" />
+                        <img
+                          src={item.img}
+                          alt={item.name}
+                          className="w-16 h-16 rounded-md"
+                        />
                         <div className="leading-4">
                           <h3 className="text-md font-semibold">{item.name}</h3>
                           <p className="text-sm text-zinc-600 mt-1">R$ {item.price.toFixed(2)}</p>
                         </div>
                       </div>
+
                       <div className="flex items-center gap-3">
-                        <button onClick={() => handleClear(item.id)} className="text-red-500 text-lg cursor-pointer hover:text-red-600 transition">
+                        <div className="flex gap-2 items-center">
+                          <button
+                            onClick={() => updateQuantity(index, -1)}
+                            className={`${item.qtd > 1 ? classBtn : classBtnMenos} ${item.qtd <= 1 ? "opacity-50 cursor-not-allowed" : ""}`}
+                            disabled={item.qtd <= 1}
+                          >
+                            <IoIosArrowBack />
+                          </button>
+                          <p className="text-sm font-medium">{item.qtd}</p>
+                          <button onClick={() => updateQuantity(index, 1)} className={classBtnMais}>
+                            <IoIosArrowForward />
+                          </button>
+                        </div>
+                        <button
+                          onClick={() => handleClear(item.id)}
+                          className="text-red-500 text-lg cursor-pointer hover:text-red-600 transition"
+                        >
                           <FaRegTrashAlt />
                         </button>
                       </div>
@@ -139,20 +158,17 @@ export const Cart = () => {
                 )}
               </div>
 
-                {/* CEP e Envio */}
-                {etapa === 2 && (
+              {/* CEP e Envio */}
+              {etapa === 2 && (
                 <div className="absolute top-12 right-0 inset-0">
                   <CepCart setEtapa={setEtapa} setDadosEntrega={setDadosEntrega} />
                 </div>
               )}
-
               {etapa === 3 && (
                 <div className="absolute top-14 min-h-10 right-0 inset-0">
                   <FormaPagamento totalPagar={totalPagar} setEtapa={setEtapa} setDadosEntrega={setDadosEntrega} />
                 </div>
               )}
-
-
 
               {etapa === 4 && (
                 <div className="absolute top-16 bg-white inset-0">
@@ -160,7 +176,8 @@ export const Cart = () => {
                 </div>
               )}
 
-              <div className="w-full bg-white border-t z-50 shadow-md p-4">
+              {/* Footer */}
+              <div className="absolute bottom-0 w-full bg-white border-t shadow-md">
                 <FooterCart dadosEntrega={dadosEntrega} dataRender={dataRender} setEtapa={setEtapa} etapa={etapa} setTotalApagar={setTotalApagar} />
               </div>
             </div>

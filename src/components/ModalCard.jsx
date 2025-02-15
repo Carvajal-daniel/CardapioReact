@@ -76,9 +76,7 @@ export const ModalCard = () => {
                 <h2 className="text-lg text-gray-900 font-bold">R$ {dataCard.price.toFixed(2)}</h2>
 
                 <div className="flex items-center space-x-4">
-                  <button onClick={() => setQtd(qtd > 1 ? qtd - 1 : 1)} className="bg-gray-200 px-2 py-2  cursor-pointer rounded-lg">
-                    <IoIosArrowBack />
-                  </button>
+                 
                   <span className="text-lg font-bold">{qtd}</span>
                   <button onClick={() => setQtd(qtd + 1)} className="bg-green-500 text-white cursor-pointer px-2 py-2 rounded-lg">
                     <IoIosArrowForward />
