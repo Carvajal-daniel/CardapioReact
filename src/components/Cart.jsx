@@ -26,9 +26,6 @@ export const Cart = () => {
   const [dadosEntrega, setDadosEntrega] = useState();
   const [totalPagar, setTotalApagar] = useState()
 
-console.log(totalPagar);
-
-  
 
   useEffect(() => {
     if (isOpenCart) {

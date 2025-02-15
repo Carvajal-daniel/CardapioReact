@@ -42,7 +42,7 @@ export const CardItem = () => {
   return (
     <>
       <motion.div
-        className="xl:grid xl:grid-cols-4 md:px-6 gap-y-2 relative bg-[#f5f5f5] xl:w-[990px] space-y-1 mx-auto xl:px-8"
+        className="xl:grid xl:grid-cols-4 md:px-6 gap-6 justify-center items-center bg-[#f5f5f5] xl:w-[1000px] mx-auto xl:px-2"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ease: "easeOut", duration: 0.4 }}
@@ -51,7 +51,7 @@ export const CardItem = () => {
           <motion.div
             key={product.id}
             onClick={() => handleClick(product)}
-            className={`mx-2 xl:h-80 xl:flex xl:flex-col xl:text-center xl:items-center bg-white shadow relative mb-2 cursor-pointer ${
+            className={`xl:h-80 mb-2 lg:mb-2 xl:flex xl:flex-col xl:text-center xl:justify-between xl:items-center bg-white shadow relative cursor-pointer ${
               dataCard?.id === product.id ? class2 : class1
             }`}
             whileHover={{
@@ -65,12 +65,12 @@ export const CardItem = () => {
             <div className="flex xl:gap-6 items-center gap-2 xl:flex xl:flex-col xl:cursor-pointer">
               <div>
                 <img
-                  className="w-24 xl:w-36 rounded-lg imgcard"
+                  className="w-24 xl:w-40 rounded-lg imgcard"
                   src={product.img}
                   alt={`Imagem do produto ${product.name}`}
                 />
               </div>
-              <div>
+              <div className="-mt-4 ml-4">
                 <h2
                   className={`w-44 font-primary text-lg font-bold ${
                     dataCard?.id === product.id
@@ -84,7 +84,7 @@ export const CardItem = () => {
                   {product.dsc}
                 </p>
               </div>
-              <div className="flex  items-center xl:right-16 xl:bottom-4 absolute h-6 right-5 bottom-2 rounded-md text-white px-2 font-medium bg-green-600">
+              <div className="flex items-center xl:right-[75px] xl:bottom-4 absolute h-6 right-5 bottom-2 rounded-md text-white px-2 font-medium bg-green-600">
                 R$ {product.price.toFixed(2)}
               </div>
             </div>
@@ -102,7 +102,7 @@ export const CardItem = () => {
             transition: { duration: 0.1 },
           }}
           onClick={() => setIsOpenCart(true)}
-          className="fixed bottom-7 right-9 xl:right-[22%] xl:bottom-8 xl:z-40 bg-white shadow-md shadow-zinc-800 cursor-pointer rounded-full flex items-center justify-center text-xl text-black h-12 w-12 hover:bg-green-600 hover:text-white transition-all duration-200"
+          className=" lg: fixed bottom-7 lg:card right-9 lg:right-6 lg:bottom-6 xl:right-[20%] xl:bottom-8 xl:z-40 bg-white shadow-md shadow-zinc-800 cursor-pointer rounded-full flex items-center justify-center text-xl text-black h-12 w-12 hover:bg-green-600 hover:text-white transition-all duration-200"
         >
           <LuShoppingBasket />
           <div className="absolute text-sm flex items-center justify-center text-white -top-2 -right-2 bg-red-600 w-6 h-6 rounded-full">
