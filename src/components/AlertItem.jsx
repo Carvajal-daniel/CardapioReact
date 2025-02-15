@@ -4,9 +4,6 @@ import { useAlert } from "../hooks/useAlert";
 const AlertItem = () => {
   const { alertItem, message, setAlertItem } = useAlert();
 
-  console.log(alertItem);
-  
-
   if (!alertItem) return null; 
 
   setTimeout(() => {

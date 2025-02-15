@@ -6,9 +6,6 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega, setTotal
   const totalPrice = dataRender.reduce((acc, item) => acc + item.price * item.qtd, 0);
   const taxa = 7.50;
 
-  console.log(dadosEntrega);
-  
-
   useEffect(() => {
     setTotalApagar(totalPrice);
   }, [totalPrice, setTotalApagar]);
