@@ -11,14 +11,14 @@ const AlertItem = () => {
 
   setTimeout(() => {
     setAlertItem(false)
-  }, 2000);
+  }, 1500);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
-      className="fixed z-50 xl:top-10 xl:left-[80%] top-16 left-5 flex items-center bg-green-500 text-white px-4 py-2 rounded-xl shadow-lg"
+      className="fixed z-50 xl:top-10 xl:left-[80%] top-18 left-5 flex items-center bg-green-500 text-white px-4 py-2 rounded-xl shadow-lg"
     >
       ✅ {message}
     </motion.div>
