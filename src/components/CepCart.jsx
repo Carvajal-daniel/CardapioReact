@@ -87,7 +87,7 @@ export const CepCart = ({ etapa, setEtapa, setDadosEntrega }) => {
   };
 
   return (
-    <div className=" bg-white h-[90%] xl:h-[780px] md:h-[450px] p-4 mt-4 text-amber-950 overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
+    <div className="bg-white min-h-screen md:min-h-[450px] xl:min-h-[780px] p-4 mt-4 text-amber-950 overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
 
       <div className="mb-2">
         <h2 className="font-bold mb-1 text-lg">Digite seu CEP</h2>
