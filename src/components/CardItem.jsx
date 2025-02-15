@@ -17,7 +17,6 @@ export const CardItem = () => {
   const { setIsOpenCart } = useCart();
   const [cartItems, setCartItems] = useState([]);
 
-
   useEffect(() => {
     const savedCart = localStorage.getItem("cartItems");
     if (savedCart) {
@@ -32,7 +31,7 @@ export const CardItem = () => {
     setCartItems(updatedCart);
     localStorage.setItem("cartItems", JSON.stringify(updatedCart));
 
-    
+
   }
 
   useEffect(() => {
@@ -111,7 +110,7 @@ export const CardItem = () => {
             <p>{dataRender.length}</p>
           </div>
 
-         
+
         </motion.div>
       )}
     </>

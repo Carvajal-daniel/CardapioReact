@@ -5,6 +5,7 @@ import { OpenProvider } from './context/ContextOpen';
 import { ProductProvider } from './context/CardProduct';
 import { OpenModalCard } from './context/OpenModal';
 import { CartProvider } from './context/ContexCart';
+import { AlertProvider } from './context/Alerts';
 
 createRoot(document.getElementById('root')).render(
 
@@ -12,7 +13,9 @@ createRoot(document.getElementById('root')).render(
     <ProductProvider>
       <OpenModalCard>
         <CartProvider>
-          <App />
+          <AlertProvider>
+            <App />
+          </AlertProvider>
         </CartProvider>
       </OpenModalCard>
     </ProductProvider>

@@ -35,9 +35,6 @@ export const Cart = () => {
       document.body.style.overflow = "auto";
     }
 
-    console.log(dadosEntrega);
-
-
     return () => {
       document.body.style.overflow = "auto";
     };

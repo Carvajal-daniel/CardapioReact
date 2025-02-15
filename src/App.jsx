@@ -6,12 +6,12 @@ import { MenuItem } from "./components/MenuItem"
 import { ModalCard } from "./components/ModalCard"
 import useOpenModal from "./hooks/useModalCard"
 import useCart from './hooks/useCart'
+import AlertItem from "./components/AlertItem"
 
 export const App = () => {
   const { isOpenModal } = useOpenModal()
-  const {isOpenCart} = useCart()
- 
-  
+  const { isOpenCart } = useCart()
+
 
   return (
     <>
@@ -23,16 +23,21 @@ export const App = () => {
         <MenuItem />
       </nav>
 
-    <section className={`fixed top-0 z-50 left-0 right-0 bottom-0 modalCard ${!isOpenCart && 'hidden'}`}>
+      <section className={`fixed top-0 z-50 left-0 right-0 bottom-0 modalCard ${!isOpenCart && 'hidden'}`}>
         <Cart />
-    </section>
-      
+      </section>
+
       <section>
+        <div>
+          <AlertItem />
+        </div>
         <CardItem />
       </section>
 
       <section className={`fixed top-0 z-50 left-0 right-0 bottom-0 modalCard ${!isOpenModal && 'hidden'}`}>
+
         <ModalCard />
+
       </section>
 
       <footer>

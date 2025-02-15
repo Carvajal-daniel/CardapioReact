@@ -4,11 +4,14 @@ import { X } from "lucide-react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import imgLogo from "../assets/menuLogo.png";
 import useOpenModal from "../hooks/useModalCard";
+import {useAlert} from '../hooks/useAlert'
 
 export const ModalCard = () => {
   const { dataCard, setIsOpenModal, isOpenModal, setDataRender } = useOpenModal();
   const [qtd, setQtd] = useState(1);
-  const [showAlert, setShowAlert] = useState(false);
+  const {alertItem, setAlertItem} = useAlert()
+
+  
 
   function resetQuantity() {
     setQtd(1);
@@ -33,9 +36,9 @@ export const ModalCard = () => {
 
   const handleAddToCart = () => {
     updateCart();
-    setShowAlert(true); // Exibe o alerta
-    setTimeout(() => setShowAlert(false), 3000); // Esconde após 3s
+   
     handleClose();
+    setAlertItem(true)
   };
 
   return (
