@@ -14,8 +14,9 @@ export const CardItem = () => {
   const { setIsOpenModal, setDataCard, isOpenModal, dataCard } = useOpenModal();
   const { nameProduct } = useProduct();
   const { dataRender } = useModalCard();
-  const { isOpenCart, setIsOpenCart } = useCart();
+  const { setIsOpenCart } = useCart();
   const [cartItems, setCartItems] = useState([]);
+
 
   useEffect(() => {
     const savedCart = localStorage.getItem("cartItems");
@@ -30,6 +31,8 @@ export const CardItem = () => {
     const updatedCart = [...cartItems, product];
     setCartItems(updatedCart);
     localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+
+    
   }
 
   useEffect(() => {
@@ -41,6 +44,7 @@ export const CardItem = () => {
 
   return (
     <>
+
       <motion.div
         className="xl:grid xl:grid-cols-4 md:px-6 gap-6 justify-center items-center bg-[#f5f5f5] xl:w-[1000px] mx-auto xl:px-2"
         initial={{ opacity: 0, y: 20 }}
@@ -51,14 +55,13 @@ export const CardItem = () => {
           <motion.div
             key={product.id}
             onClick={() => handleClick(product)}
-            className={`xl:h-80 mb-2 lg:mb-2 xl:flex xl:flex-col xl:text-center xl:justify-between xl:items-center bg-white shadow relative cursor-pointer ${
-              dataCard?.id === product.id ? class2 : class1
-            }`}
+            className={`xl:h-80 mb-2 lg:mb-2 xl:flex xl:flex-col xl:text-center xl:justify-between xl:items-center bg-white shadow relative cursor-pointer ${dataCard?.id === product.id ? class2 : class1
+              }`}
             whileHover={{
-              scale: window.innerWidth >= 1024 ? 1.03 : .8,
+              scale: window.innerWidth >= 1024 ? 1.03 : 0.8,
               transition: { duration: 0.15 },
             }}
-            initial={{ opacity: 0, y: 20, }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.15 }}
           >
@@ -72,11 +75,10 @@ export const CardItem = () => {
               </div>
               <div className="-mt-4 ml-4">
                 <h2
-                  className={`w-44 font-primary text-lg font-bold ${
-                    dataCard?.id === product.id
-                      ? "uppercase text-black"
-                      : "uppercase font-bold text-text-primary"
-                  }`}
+                  className={`w-44 font-primary text-lg font-bold ${dataCard?.id === product.id
+                    ? "uppercase text-black"
+                    : "uppercase font-bold text-text-primary"
+                    }`}
                 >
                   {product.name}
                 </h2>
@@ -102,12 +104,14 @@ export const CardItem = () => {
             transition: { duration: 0.1 },
           }}
           onClick={() => setIsOpenCart(true)}
-          className=" lg: fixed bottom-7 lg:card right-9 lg:right-6 lg:bottom-6 xl:right-[20%] xl:bottom-8 xl:z-40 bg-white shadow-md shadow-zinc-800 cursor-pointer rounded-full flex items-center justify-center text-xl text-black h-12 w-12 hover:bg-green-600 hover:text-white transition-all duration-200"
+          className="lg: fixed bottom-7 lg:card right-9 lg:right-6 lg:bottom-6 xl:right-[20%] xl:bottom-8 xl:z-40 bg-white shadow-md shadow-zinc-800 cursor-pointer rounded-full flex items-center justify-center text-xl text-black h-12 w-12 hover:bg-green-600 hover:text-white transition-all duration-200"
         >
           <LuShoppingBasket />
           <div className="absolute text-sm flex items-center justify-center text-white -top-2 -right-2 bg-red-600 w-6 h-6 rounded-full">
             <p>{dataRender.length}</p>
           </div>
+
+         
         </motion.div>
       )}
     </>

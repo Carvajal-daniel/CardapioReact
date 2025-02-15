@@ -5,7 +5,7 @@ import { IsOpen } from './IsOpen';
 
 export const HeaderInfo = () => {
   return (
-    <div className="flex justify-between lg:w-[980px] xl:-mt-8 -mt-5 xl:px-9 xl:py-1 xl:w-[1070px] bg-[#f5f5f5] rounded-t-2xl px-5 py-2 border-b border-zinc-300 md:w-[1150px] md:mx-auto flex-col ">
+    <div className="flex  justify-between lg:w-[980px] xl:-mt-8 -mt-5 xl:px-9 xl:py-1 xl:w-[1070px] bg-[#f5f5f5] rounded-t-2xl px-5 py-2 border-b border-zinc-300 md:w-[1150px] md:mx-auto flex-col ">
 
 
       <div className='flex items-center w-full justify-between'>

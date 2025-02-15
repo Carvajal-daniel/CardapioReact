@@ -25,6 +25,7 @@ export const Cart = () => {
   const [etapa, setEtapa] = useState(1);
   const [dadosEntrega, setDadosEntrega] = useState();
   const [totalPagar, setTotalApagar] = useState()
+  const [alertVisible, setAlertVisible] = useState(false); 
 
 
   useEffect(() => {
@@ -78,114 +79,123 @@ export const Cart = () => {
 
 
   return (
-    <AnimatePresence mode="wait">
-      {isOpenCart && (
-        <motion.div
-          key="cart"
-          initial={{ opacity: 0, x: 300 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 300 }}
-          transition={{ type: "spring", stiffness: 100, damping: 15 }}
-          className="fixed top-0 right-0 h-full w-full md:max-w-md bg-zinc-100 shadow-lg text-text-primary z-50"
-        >
-          <div>
-            <div className="shadow-lg border-b border-zinc-200 bg-white h-16 flex items-center justify-between px-4">
-              <button
-                onClick={() => {
-                  setEtapa((prev) => prev - 1);
-                }}
-                className="text-xl bg-white border-1 shadow border-zinc-200 px-3 py-2 rounded font-medium "
-              >
-                <IoIosArrowBack />
+    <>
+     
+     {alertVisible && (
+              <div className=" w-60 absolute z-50 right-50 bottom-3 xl:bottom-10 xl:right-6  transform xl:-translate-x-1/2 bg-green-500 text-white text-center py-2 px-4 rounded-md shadow-md">
+                <p className="text-sm">Item adicionado ao carrinho!</p>
+              </div>
+            )}
+        
+      <AnimatePresence mode="wait">
+        {isOpenCart && (
+          <motion.div
+            key="cart"
+            initial={{ opacity: 0, x: 300 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 300 }}
+            transition={{ type: "spring", stiffness: 100, damping: 15 }}
+            className="fixed top-0 right-0 h-full w-full md:max-w-md bg-zinc-100 shadow-lg text-text-primary z-50"
+          >
+            <div>
+              <div className="shadow-lg border-b border-zinc-200 bg-white h-16 flex items-center justify-between px-4">
+                <button
+                  onClick={() => {
+                    setEtapa((prev) => prev - 1);
+                  }}
+                  className="text-xl bg-white border-1 shadow border-zinc-200 px-3 py-2 rounded font-medium "
+                >
+                  <IoIosArrowBack />
 
-              </button>
-              <button
-                onClick={() => {
-                  setIsOpenCart(false);
-                  setEtapa(1);
-                }}
-                className="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition"
-              >
-                <IoMdClose size={22} />
-              </button>
-            </div>
+                </button>
+                <button
+                  onClick={() => {
+                    setIsOpenCart(false);
+                    setEtapa(1);
+                  }}
+                  className="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition"
+                >
+                  <IoMdClose size={22} />
+                </button>
+              </div>
 
 
-            {/* Conteúdo do Carrinho */}
-            <div className="p-4 h-[660px] xl:h-[750px] md:h-[400px] overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
-              {Array.isArray(dataRender) && dataRender.length > 0 ? (
-                dataRender.map((item, index) => (
-                  <div
-                    key={index}
-                    className="relative flex justify-between items-center w-full bg-white p-3 mb-2 rounded-lg shadow"
-                  >
-                    <div className="flex gap-3">
-                      <img
-                        src={item.img}
-                        alt={item.name}
-                        className="w-16 h-16 rounded-md"
-                      />
-                      <div className="leading-4">
-                        <h3 className="text-md font-semibold">{item.name}</h3>
-                        <p className="text-sm text-zinc-600 mt-1">R$ {item.price.toFixed(2)}</p>
+              {/* Conteúdo do Carrinho */}
+              <div className="p-4 h-[660px] xl:h-[750px] md:h-[400px] overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
+                {Array.isArray(dataRender) && dataRender.length > 0 ? (
+                  dataRender.map((item, index) => (
+                    <div
+                      key={index}
+                      className="relative flex justify-between items-center w-full bg-white p-3 mb-2 rounded-lg shadow"
+                    >
+                      <div className="flex gap-3">
+                        <img
+                          src={item.img}
+                          alt={item.name}
+                          className="w-16 h-16 rounded-md"
+                        />
+                        <div className="leading-4">
+                          <h3 className="text-md font-semibold">{item.name}</h3>
+                          <p className="text-sm text-zinc-600 mt-1">R$ {item.price.toFixed(2)}</p>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="flex items-center gap-3">
-                      <div className="flex gap-2 items-center">
+                      <div className="flex items-center gap-3">
+                        <div className="flex gap-2 items-center">
+                          <button
+                            onClick={() => updateQuantity(index, -1)}
+                            className={`${item.qtd > 1 ? classBtn : classBtnMenos} ${item.qtd <= 1 ? "opacity-50 cursor-not-allowed" : ""
+                              }`}
+                            disabled={item.qtd <= 1}
+                          >
+                            <IoIosArrowBack />
+                          </button>
+                          <p className="text-sm font-medium">{item.qtd}</p>
+                          <button onClick={() => updateQuantity(index, 1)} className={classBtnMais}>
+                            <IoIosArrowForward />
+                          </button>
+                        </div>
                         <button
-                          onClick={() => updateQuantity(index, -1)}
-                          className={`${item.qtd > 1 ? classBtn : classBtnMenos} ${item.qtd <= 1 ? "opacity-50 cursor-not-allowed" : ""
-                            }`}
-                          disabled={item.qtd <= 1}
+                          onClick={() => handleClear(item.id)}
+                          className="text-red-500 text-lg cursor-pointer hover:text-red-600 transition"
                         >
-                          <IoIosArrowBack />
-                        </button>
-                        <p className="text-sm font-medium">{item.qtd}</p>
-                        <button onClick={() => updateQuantity(index, 1)} className={classBtnMais}>
-                          <IoIosArrowForward />
+                          <FaRegTrashAlt />
                         </button>
                       </div>
-                      <button
-                        onClick={() => handleClear(item.id)}
-                        className="text-red-500 text-lg cursor-pointer hover:text-red-600 transition"
-                      >
-                        <FaRegTrashAlt />
-                      </button>
                     </div>
-                  </div>
-                ))
-              ) : (
-                <p className="text-gray-500">Seu carrinho está vazio.</p>
+                  ))
+                ) : (
+                  <p className="text-gray-500">Seu carrinho está vazio.</p>
+                )}
+              </div>
+
+              {/* CEP e Envio */}
+              {etapa === 2 && (
+                <div className="absolute top-12 right-0 inset-0">
+                  <CepCart setEtapa={setEtapa} setDadosEntrega={setDadosEntrega} />
+                </div>
               )}
+              {etapa === 3 && (
+                <div className="absolute top-14 min-h-10 right-0 inset-0">
+                  <FormaPagamento totalPagar={totalPagar} setEtapa={setEtapa} setDadosEntrega={setDadosEntrega} />
+                </div>
+              )}
+
+
+              {etapa === 4 && (
+                <div className="absolute top-16 bg-white inset-0">
+                  <EnviarPEdido setEtapa={setEtapa} dataRender={dataRender} dadosEntrega={dadosEntrega} />
+                </div>
+              )}
+
+              {/* Footer */}
+              <div className="absolute bottom-0 w-full bg-white border-t shadow-md">
+                <FooterCart dadosEntrega={dadosEntrega} dataRender={dataRender} setEtapa={setEtapa} etapa={etapa} setTotalApagar={setTotalApagar} />
+              </div>
             </div>
-
-            {/* CEP e Envio */}
-            {etapa === 2 && (
-              <div className="absolute top-12 right-0 inset-0">
-                <CepCart setEtapa={setEtapa} setDadosEntrega={setDadosEntrega} />
-              </div>
-            )}
-            {etapa === 3 && (
-              <div className="absolute top-14 min-h-10 right-0 inset-0">
-                <FormaPagamento totalPagar={totalPagar} setEtapa={setEtapa} setDadosEntrega={setDadosEntrega} />
-              </div>
-            )}
-
-
-            {etapa === 4 && (
-              <div className="absolute top-16 bg-white inset-0">
-                <EnviarPEdido setEtapa={setEtapa} dataRender={dataRender} dadosEntrega={dadosEntrega} />
-              </div>
-            )}
-
-            {/* Footer */}
-            <div className="absolute bottom-0 w-full bg-white border-t shadow-md">
-              <FooterCart dadosEntrega={dadosEntrega} dataRender={dataRender} setEtapa={setEtapa} etapa={etapa} setTotalApagar={setTotalApagar}/>
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };

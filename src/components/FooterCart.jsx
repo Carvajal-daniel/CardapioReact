@@ -6,6 +6,9 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega, setTotal
   const totalPrice = dataRender.reduce((acc, item) => acc + item.price * item.qtd, 0);
   const taxa = 7.50;
 
+  console.log(dadosEntrega);
+  
+
   useEffect(() => {
     setTotalApagar(totalPrice);
   }, [totalPrice, setTotalApagar]);
@@ -15,37 +18,42 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega, setTotal
       alert("Endereço de entrega incompleto!");
       return;
     }
-
+  
     const numeroWhatsApp = "+5585921518460"; // Substitua pelo número correto
-
+  
     let mensagem = `📦 *Resumo do Pedido* 📦\n\n`;
-
+  
     mensagem += `🛒 *Itens do Pedido:*\n`;
     dataRender.forEach((item, index) => {
       mensagem += `  ${index + 1}. ${item.name} - Quantidade: ${item.qtd}\n`;
     });
-
+  
     mensagem += `\n🏠 *Endereço de Entrega:*\n`;
     mensagem += `  ${dadosEntrega.logradouro}, ${dadosEntrega.numero}, ${dadosEntrega.bairro}\n`;
     mensagem += `  ${dadosEntrega.cidade}-${dadosEntrega.estado} / ${dadosEntrega.cep}\n`;
     mensagem += dadosEntrega.complemento ? `  Complemento: ${dadosEntrega.complemento}\n` : "";
-
-    if (dadosEntrega.trocoPara) {
-      const troco = parseFloat(dadosEntrega.trocoPara); // Conversão para número
+  
+    // Adiciona a forma de pagamento
+    mensagem += `\n💳 *Forma de Pagamento:* ${dadosEntrega.formaPagamento || "Não informado"}\n`;
+  
+    if (dadosEntrega.formaPagamento === "dinheiro" && dadosEntrega.trocoPara) {
+      const troco = parseFloat(dadosEntrega.trocoPara);
       if (!isNaN(troco)) {
-        mensagem += `\n💰 *Troco para:* R$ ${troco.toFixed(2)}\n`;
+        mensagem += `💰 *Troco para:* R$ ${troco.toFixed(2)}\n`;
       }
     }
-
+  
     mensagem += `\n✅ Pedido pronto para envio!`;
-
+  
     const mensagemEncoded = encodeURIComponent(mensagem);
     const urlWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagemEncoded}`;
-
+  
     localStorage.clear();
     setEtapa(0);
     window.open(urlWhatsApp, "_blank");
   };
+  
+  
 
   return (
     <div className="flex flex-col p-4 bg-white shadow-md rounded-lg">
@@ -63,6 +71,7 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega, setTotal
             <span>Entrega:</span>
           </div>
           <span className="text-zinc-700">R$ {parseFloat(taxa).toFixed(2)}</span>
+          
         </div>
       )}
 
@@ -74,6 +83,7 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega, setTotal
         </span>
       </div>
 
+ 
       {/* Botões */}
       <div className={`${etapa === 2 ? "hidden justify-center items-center gap-3 mt-3 w-full" : 'flex'}`}>
         <button
@@ -81,7 +91,6 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega, setTotal
           className={`${etapa >= 3 ? 'hidden' : "cursor-pointer mt-2 bg-green-500 shadow-lg px-6 py-2 rounded-lg text-white font-medium hover:bg-green-600 transition"}`}>
           Continuar
         </button>
-
         {etapa === 4 && (
           <div className="w-full flex items-center justify-center">
             <button

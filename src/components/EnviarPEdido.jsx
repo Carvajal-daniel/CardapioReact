@@ -33,6 +33,11 @@ export const EnviarPEdido = ({dataRender, dadosEntrega }) => {
             <h2 className="text-lg font-medium">
               {`${dadosEntrega.cidade}-${dadosEntrega.estado} / ${dadosEntrega.cep}`}
             </h2>
+            <h2 className="text-lg font-medium">
+             
+          <p>Pagamento: {dadosEntrega.formaPagamento}</p>
+            </h2>
+
           </div>
         </div>
       ) : (
