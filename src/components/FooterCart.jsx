@@ -53,7 +53,7 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega, setTotal
   
 
   return (
-    <div className="flex relative flex-col mt-2 mb-8 p-4 bg-white shadow-md rounded-lg">
+    <div className="flex relative flex-col mt-2 mb-5 p-4 bg-white shadow-md rounded-lg">
       {/* Subtotal */}
       <div className="flex -mt-5 gap-2 justify-end font-medium text-zinc-700">
         <h2 className="text-lg">SubTotal:</h2>
