@@ -13,11 +13,11 @@ import { FormaPagamento } from "./FormaPagamento";
 const STORAGE_KEY = "cartItems";
 
 const classBtnMenos =
-  "border cursor-pointer px-2 py-2 text-lg rounded-lg bg-white shadow border-zinc-200 hover:scale-105 active:scale-95 transition";
+  "border cursor-pointer px-3 py-2 text-lg rounded-lg bg-white shadow border-zinc-200 hover:scale-105 active:scale-95 transition";
 const classBtnMais =
-  "border text-white cursor-pointer px-2 py-2 text-lg rounded-lg shadow bg-green-500 border-zinc-200 hover:scale-105 active:scale-95 transition hover:bg-green-600";
+  "border text-white cursor-pointer px-3 py-2 text-lg rounded-lg shadow bg-green-500 border-zinc-200 hover:scale-105 active:scale-95 transition hover:bg-green-600";
 const classBtn =
-  "border text-white cursor-pointer px-2 py-2 text-lg rounded-lg bg-red-500 shadow border-zinc-200 hover:scale-105 active:scale-95 transition hover:bg-red-600";
+  "border text-white cursor-pointer px-3 py-2 text-lg rounded-lg bg-red-500 shadow border-zinc-200 hover:scale-105 active:scale-95 transition hover:bg-red-600";
 
 export const Cart = () => {
   const { isOpenCart, setIsOpenCart } = useCart();
@@ -89,13 +89,13 @@ export const Cart = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 300 }}
             transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            className="fixed top-0 right-0 h-full w-full md:max-w-md bg-zinc-100 shadow-lg text-text-primary z-50"
+            className="fixed top-0 right-0 h-full w-full max-w-md bg-zinc-100 shadow-lg text-text-primary z-50"
           >
             <div>
               <div className="shadow-lg border-b border-zinc-200 bg-white h-16 flex items-center justify-between px-4">
                 <button
                   onClick={() => setEtapa(1)}
-                  className="text-xl bg-white border-1 shadow border-zinc-200 px-3 py-2 rounded font-medium "
+                  className="text-xl bg-white border-1 shadow border-zinc-200 px-3 py-2 rounded font-medium"
                 >
                   <IoIosArrowBack />
                 </button>
@@ -111,14 +111,14 @@ export const Cart = () => {
               </div>
 
               {/* Conteúdo do Carrinho */}
-              <div className="h-[450px] pb-30 p-4 xl:h-[750px] md:h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
+              <div className="h-[100vh] p-4 pb-60 xl:h-[750px] md:h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
                 {Array.isArray(dataRender) && dataRender.length > 0 ? (
                   dataRender.map((item, index) => (
                     <div
                       key={index}
-                      className="relative flex justify-between items-center w-full bg-white p-3 mb-2 rounded-lg shadow"
+                      className="relative flex justify-between items-center w-full bg-white p-3 mb-3 rounded-lg shadow"
                     >
-                      <div className="flex gap-3">
+                      <div className="flex gap-3 flex-1">
                         <img
                           src={item.img}
                           alt={item.name}
