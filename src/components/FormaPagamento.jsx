@@ -56,7 +56,7 @@ export const FormaPagamento = ({ totalPagar, setEtapa, setDadosEntrega }) => {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-lg mx-auto h-[74%] p-6 bg-white shadow-md">
       <h3 className="text-xl font-semibold mb-4">Escolha a forma de pagamento</h3>
 
       <div className="mb-4">

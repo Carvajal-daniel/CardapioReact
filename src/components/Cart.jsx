@@ -25,7 +25,7 @@ export const Cart = () => {
   const [etapa, setEtapa] = useState(1);
   const [dadosEntrega, setDadosEntrega] = useState();
   const [totalPagar, setTotalApagar] = useState()
-  const [alertVisible, setAlertVisible] = useState(false); 
+  const [alertVisible, setAlertVisible] = useState(false);
 
 
   useEffect(() => {
@@ -74,16 +74,15 @@ export const Cart = () => {
     setDataRender((prevData) => prevData.filter((item) => item.id !== id));
   }
 
-
   return (
     <>
-     
-     {alertVisible && (
-              <div className=" w-60 absolute z-50 right-50 bottom-3 xl:bottom-10 xl:right-6  transform xl:-translate-x-1/2 bg-green-500 text-white text-center py-2 px-4 rounded-md shadow-md">
-                <p className="text-sm">Item adicionado ao carrinho!</p>
-              </div>
-            )}
-        
+
+      {alertVisible && (
+        <div className=" w-60 absolute z-50 right-50 bottom-3 xl:bottom-10 xl:right-6  transform xl:-translate-x-1/2 bg-green-500 text-white text-center py-2 px-4 rounded-md shadow-md">
+          <p className="text-sm">Item adicionado ao carrinho!</p>
+        </div>
+      )}
+
       <AnimatePresence mode="wait">
         {isOpenCart && (
           <motion.div
@@ -97,9 +96,7 @@ export const Cart = () => {
             <div>
               <div className="shadow-lg border-b border-zinc-200 bg-white h-16 flex items-center justify-between px-4">
                 <button
-                  onClick={() => {
-                    setEtapa((prev) => prev - 1);
-                  }}
+                  onClick={() => setEtapa(1)}
                   className="text-xl bg-white border-1 shadow border-zinc-200 px-3 py-2 rounded font-medium "
                 >
                   <IoIosArrowBack />
@@ -108,7 +105,7 @@ export const Cart = () => {
                 <button
                   onClick={() => {
                     setIsOpenCart(false);
-                    setEtapa(1);
+                    setEtapa(prev => prev + 1);
                   }}
                   className="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition"
                 >
@@ -118,7 +115,8 @@ export const Cart = () => {
 
 
               {/* Conteúdo do Carrinho */}
-              <div className="p-4 h-[660px] xl:h-[750px] md:h-[400px] overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
+              <div className=" h-[400px] p-4 xl:h-[750px] md:h-[400px] overflow-y-auto  scrollbar-thin scrollbar-thumb-zinc-300 scrollbar-track-zinc-100">
+                
                 {Array.isArray(dataRender) && dataRender.length > 0 ? (
                   dataRender.map((item, index) => (
                     <div
@@ -177,6 +175,7 @@ export const Cart = () => {
                   <FormaPagamento totalPagar={totalPagar} setEtapa={setEtapa} setDadosEntrega={setDadosEntrega} />
                 </div>
               )}
+
 
 
               {etapa === 4 && (

@@ -4,14 +4,14 @@ import { X } from "lucide-react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import imgLogo from "../assets/menuLogo.png";
 import useOpenModal from "../hooks/useModalCard";
-import {useAlert} from '../hooks/useAlert'
+import { useAlert } from '../hooks/useAlert'
 
 export const ModalCard = () => {
   const { dataCard, setIsOpenModal, isOpenModal, setDataRender } = useOpenModal();
   const [qtd, setQtd] = useState(1);
-  const {alertItem, setAlertItem} = useAlert()
+  const { setAlertItem } = useAlert()
 
-  
+
 
   function resetQuantity() {
     setQtd(1);
@@ -36,7 +36,7 @@ export const ModalCard = () => {
 
   const handleAddToCart = () => {
     updateCart();
-   
+
     handleClose();
     setAlertItem(true)
   };
@@ -98,7 +98,7 @@ export const ModalCard = () => {
         )}
       </AnimatePresence>
 
-    
+
     </>
   );
 };

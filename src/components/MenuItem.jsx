@@ -24,7 +24,7 @@ export const MenuItem = () => {
 
   return (
     <motion.div
-      className="py-2 bg-[#f5f5f5] flex justify-center lg:w-[980px] lg:mx-auto w-full xl:w-[1070px] xl:mx-auto"
+      className="py-2 xl:mb-2 bg-[#f5f5f5] flex justify-center lg:w-[980px] lg:mx-auto w-full xl:w-[1070px] xl:mx-auto"
       initial={{ y: 100 }}
       animate={{ y: 0 }}
       transition={{ ease: "easeOut", duration: .6 }}

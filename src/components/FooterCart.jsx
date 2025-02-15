@@ -58,7 +58,7 @@ export const FooterCart = ({ dataRender, setEtapa, etapa, dadosEntrega, setTotal
   return (
     <div className="flex flex-col p-4 bg-white shadow-md rounded-lg">
       {/* Subtotal */}
-      <div className="flex gap-2 justify-end font-medium text-zinc-700">
+      <div className="flex -mt-2 gap-2 justify-end font-medium text-zinc-700">
         <h2 className="text-lg">SubTotal:</h2>
         <span className="text-zinc-900 font-semibold">R$ {totalPrice.toFixed(2)}</span>
       </div>
